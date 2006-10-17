@@ -1,0 +1,11 @@
+Tworzymy oprogramowanie umo¿liwiaj¹ce tworznie ankiet internetowych.
+
+Ankieter tworzy ankiete, dodaje nowe pytania, ustale czas trwania ankiety oraz wysy³a email z proœbê o 
+wype³nienie ankiety do respodentów, których dane znajduj¹ siê w bazie danych.
+
+Respondent wype³nia ankiete poprzez przegl¹darke internetow¹. Ankieta ma byæ dostêpn¹, bezwzglêdu na posiadany 
+przez respondenta system operacyjny czy przegl¹darkê internetow¹.
+
+System posiada zdefiniowane podstawowe typy pytañ.
+
+System da siê rozszerzyæ o nowe typy pytañ poprzez napisanie odpowiedniego pluginu.
