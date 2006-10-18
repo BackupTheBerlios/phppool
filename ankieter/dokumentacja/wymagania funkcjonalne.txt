@@ -1,0 +1,13 @@
+- umo¿liwia zdalne tworzenie ankiet
+- umo¿liwia edycje istniej¹cych ankiet (trzy statusy ankiety: nieaktywna, aktywna, zakoñczona)
+- umo¿liwia wype³nienie ankiet poprzez internet
+- edytowanie bazy adresów email respondentów (mo¿liwoœæ dodania emaila przez internaute)
+- rozsy³anie maili z informacj¹ o ankietach
+- umo¿liwia definiowanie w³asnych typów pytañ
+- przechowuje dane o wype³nionych ankietach - archiwizacja odpowiedzi
+- zawiera zdefiniowane podstawowe typy pytañ:
+    - pytania wielokrotnego wyboru z mo¿liwoœci¹ zaznaczenia wielu odpowiedzi
+    - pytania wielokrotnego wyboru z mo¿liwoœci¹ zaznaczenia jednej odpowiedzi
+    - pole komentarz - pole tekstowe pozwalajace na napisanie opinii, odpowiedzi
+- prezentowanie wyników w formie tabelarycnej
+- export wyników ankiety do exela
