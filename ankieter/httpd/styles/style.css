@@ -1,0 +1,11 @@
+
+BODY{
+	margin: 20; 	
+	padding: 0; 
+	color:black; 
+}
+
+A:link{color:#FFC843; text-decoration:none}
+A:visited{color:#FFC843;text-decoration:none}
+A:active {color: #FFC843; TEXT-DECORATION: none}
+A:hover{color:black;TEXT-DECORATION: none}
