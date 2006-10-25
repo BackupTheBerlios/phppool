@@ -1,0 +1,27 @@
+n, dn. 18.10.2006 r.
+
+
+
+
+Protokó³ ze spotkania roboczego nr 1, które odby³o siê w siedzibie Instytutu Informatyki Politechniki Lubelskiej
+
+Udzia³ wziêli:
+- firma: Hubert Marzec, Rafa³ Libik, Sebastian Kowalski i Tomasz Pietrzyk
+- Instytut Informatyki reprezentowany przez Pana mgr in¿. Dariusza Bober
+
+
+
+1.	W trakcie spotkania poruszone zosta³y zagadnienia zwi±zane z wymaganiami funkcjonalnymi projektu, jak równie¿ omówiono diagram zwi±zków encji.
+2.	Uczestnicy spotkania dokonali nastêpuj±cych ustaleñ:
+a)	ad. 2. ankiety charakteryzowaæ siê bêd± jednym z nastêpuj±cych statusów: nieaktywna, aktywna, zakoñczona;
+b)	ad. 4. bêdzie istnia³a mo¿liwo¶æ dodawania adresów e-mail do istniej±cej bazy równie¿ przez internautê;
+c)	ad. 7. system zapewnia³ bêdzie archiwizowanie ankiet;
+d)	ad. 9. dane bêd± reprezentowane w postaci tabelarycznej z mo¿liwo¶ci± eksportu danych do programu Microsoft Excel.
+ 
+
+
+
+..................	..................
+przedstawiciel firmy	przedstawiciel Instytutu Informatyki
+
+
