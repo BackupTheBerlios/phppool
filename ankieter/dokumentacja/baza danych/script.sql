@@ -1,6 +1,6 @@
 /*
 Created		2006-10-27
-Modified		2006-10-27
+Modified		2006-10-29
 Project		
 Model		
 Company		
@@ -16,6 +16,8 @@ Database		mySQL 4.1
 
 
 
+drop table IF EXISTS grupy;
+drop table IF EXISTS wypelnione_ankiety;
 drop table IF EXISTS uzytkownicy;
 drop table IF EXISTS odpowiedzi;
 drop table IF EXISTS warianty_odpowiedzi;
@@ -71,18 +73,32 @@ AUTO_INCREMENT = 0;
 Create table odpowiedzi (
 	id_odpowiedz Int UNSIGNED NOT NULL AUTO_INCREMENT,
 	id_pytanie Int UNSIGNED NOT NULL,
+	id_respondent Mediumint UNSIGNED NOT NULL,
 	odpowiedz Varchar(250) CHARACTER SET latin2 NOT NULL,
+	kolejnosc Smallint NOT NULL,
  Primary Key (id_odpowiedz)) ENGINE = MyISAM
 AUTO_INCREMENT = 0;
 
 Create table uzytkownicy (
 	id_uzytkownik Smallint UNSIGNED NOT NULL AUTO_INCREMENT,
+	id_grupa Tinyint NOT NULL,
 	login Varchar(10) NOT NULL,
 	haslo Varchar(15) NOT NULL,
-	grupa Enum('gosc','admin','ankieter') NOT NULL,
 	UNIQUE (login),
  Primary Key (id_uzytkownik)) ENGINE = MyISAM
 AUTO_INCREMENT = 0;
+
+Create table wypelnione_ankiety (
+	id_wypelniona_ankieta Int UNSIGNED NOT NULL AUTO_INCREMENT,
+	id_ankieta Mediumint UNSIGNED NOT NULL,
+	id_respondent Mediumint UNSIGNED NOT NULL,
+ Primary Key (id_wypelniona_ankieta)) ENGINE = MyISAM;
+
+Create table grupy (
+	id_grupa Tinyint NOT NULL,
+	nazwa Varchar(50) NOT NULL,
+	UNIQUE (nazwa),
+ Primary Key (id_grupa)) ENGINE = MyISAM;
 
 
 
@@ -96,10 +112,14 @@ AUTO_INCREMENT = 0;
 
 
 Alter table pytania add Foreign Key (id_ankieta) references ankiety (id_ankieta) on delete  restrict on update  restrict;
+Alter table wypelnione_ankiety add Foreign Key (id_ankieta) references ankiety (id_ankieta) on delete  restrict on update  restrict;
+Alter table wypelnione_ankiety add Foreign Key (id_respondent) references respondenci (id_respondent) on delete  restrict on update  restrict;
+Alter table odpowiedzi add Foreign Key (id_respondent) references respondenci (id_respondent) on delete  restrict on update  restrict;
 Alter table warianty_odpowiedzi add Foreign Key (id_pytanie) references pytania (id_pytanie) on delete  restrict on update  restrict;
 Alter table odpowiedzi add Foreign Key (id_pytanie) references pytania (id_pytanie) on delete  restrict on update  restrict;
 Alter table pytania add Foreign Key (id_typ_odpowiedzi) references typy_odpowiedzi (id_typ_odpowiedzi) on delete  restrict on update  restrict;
 Alter table ankiety add Foreign Key (id_uzytkownik) references uzytkownicy (id_uzytkownik) on delete  restrict on update  restrict;
+Alter table uzytkownicy add Foreign Key (id_grupa) references grupy (id_grupa) on delete  restrict on update  restrict;
 
 
 
