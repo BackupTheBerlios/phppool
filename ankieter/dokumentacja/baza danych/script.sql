@@ -73,7 +73,7 @@ AUTO_INCREMENT = 0;
 Create table odpowiedzi (
 	id_odpowiedz Int UNSIGNED NOT NULL AUTO_INCREMENT,
 	id_pytanie Int UNSIGNED NOT NULL,
-	id_respondent Mediumint UNSIGNED NOT NULL,
+	id_wypelniona_ankieta Int UNSIGNED NOT NULL,
 	odpowiedz Varchar(250) CHARACTER SET latin2 NOT NULL,
 	kolejnosc Smallint NOT NULL,
  Primary Key (id_odpowiedz)) ENGINE = MyISAM
@@ -91,7 +91,7 @@ AUTO_INCREMENT = 0;
 Create table wypelnione_ankiety (
 	id_wypelniona_ankieta Int UNSIGNED NOT NULL AUTO_INCREMENT,
 	id_ankieta Mediumint UNSIGNED NOT NULL,
-	id_respondent Mediumint UNSIGNED NOT NULL,
+	kolejnosc Smallint,
  Primary Key (id_wypelniona_ankieta)) ENGINE = MyISAM;
 
 Create table grupy (
@@ -113,12 +113,11 @@ Create table grupy (
 
 Alter table pytania add Foreign Key (id_ankieta) references ankiety (id_ankieta) on delete  restrict on update  restrict;
 Alter table wypelnione_ankiety add Foreign Key (id_ankieta) references ankiety (id_ankieta) on delete  restrict on update  restrict;
-Alter table wypelnione_ankiety add Foreign Key (id_respondent) references respondenci (id_respondent) on delete  restrict on update  restrict;
-Alter table odpowiedzi add Foreign Key (id_respondent) references respondenci (id_respondent) on delete  restrict on update  restrict;
 Alter table warianty_odpowiedzi add Foreign Key (id_pytanie) references pytania (id_pytanie) on delete  restrict on update  restrict;
 Alter table odpowiedzi add Foreign Key (id_pytanie) references pytania (id_pytanie) on delete  restrict on update  restrict;
 Alter table pytania add Foreign Key (id_typ_odpowiedzi) references typy_odpowiedzi (id_typ_odpowiedzi) on delete  restrict on update  restrict;
 Alter table ankiety add Foreign Key (id_uzytkownik) references uzytkownicy (id_uzytkownik) on delete  restrict on update  restrict;
+Alter table odpowiedzi add Foreign Key (id_wypelniona_ankieta) references wypelnione_ankiety (id_wypelniona_ankieta) on delete  restrict on update  restrict;
 Alter table uzytkownicy add Foreign Key (id_grupa) references grupy (id_grupa) on delete  restrict on update  restrict;
 
 
