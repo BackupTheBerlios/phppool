@@ -16,7 +16,6 @@ Database		mySQL 4.1
 
 
 
-drop table IF EXISTS grupy;
 drop table IF EXISTS wypelnione_ankiety;
 drop table IF EXISTS uzytkownicy;
 drop table IF EXISTS odpowiedzi;
@@ -81,9 +80,9 @@ AUTO_INCREMENT = 0;
 
 Create table uzytkownicy (
 	id_uzytkownik Smallint UNSIGNED NOT NULL AUTO_INCREMENT,
-	id_grupa Tinyint NOT NULL,
 	login Varchar(10) NOT NULL,
 	haslo Varchar(15) NOT NULL,
+	grupa Tinyint NOT NULL,
 	UNIQUE (login),
  Primary Key (id_uzytkownik)) ENGINE = MyISAM
 AUTO_INCREMENT = 0;
@@ -91,14 +90,7 @@ AUTO_INCREMENT = 0;
 Create table wypelnione_ankiety (
 	id_wypelniona_ankieta Int UNSIGNED NOT NULL AUTO_INCREMENT,
 	id_ankieta Mediumint UNSIGNED NOT NULL,
-	kolejnosc Smallint,
  Primary Key (id_wypelniona_ankieta)) ENGINE = MyISAM;
-
-Create table grupy (
-	id_grupa Tinyint NOT NULL,
-	nazwa Varchar(50) NOT NULL,
-	UNIQUE (nazwa),
- Primary Key (id_grupa)) ENGINE = MyISAM;
 
 
 
@@ -118,7 +110,6 @@ Alter table odpowiedzi add Foreign Key (id_pytanie) references pytania (id_pytan
 Alter table pytania add Foreign Key (id_typ_odpowiedzi) references typy_odpowiedzi (id_typ_odpowiedzi) on delete  restrict on update  restrict;
 Alter table ankiety add Foreign Key (id_uzytkownik) references uzytkownicy (id_uzytkownik) on delete  restrict on update  restrict;
 Alter table odpowiedzi add Foreign Key (id_wypelniona_ankieta) references wypelnione_ankiety (id_wypelniona_ankieta) on delete  restrict on update  restrict;
-Alter table uzytkownicy add Foreign Key (id_grupa) references grupy (id_grupa) on delete  restrict on update  restrict;
 
 
 
