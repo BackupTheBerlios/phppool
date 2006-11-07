@@ -1,0 +1,29 @@
+PODZIAL PRACY PRZY PROJEKCIE ANKIETER
+
+Hubert Marzec
+-zaprojektowanie struktury aplikacji (podział na moduły, klasy)
+-wykonanie klasy autoryzacji i autentykacji użytkowników
+-zaprojektowanie gui
+-wykonanie modułu Ankieter(odpowiedzialnego za tworzenie, edycje
+oraz usuwanie ankiet)
+-nadzorowanie pracami projektu
+
+
+Rafał Libik
+-struktura bazy danych oraz określenie typów pól w bazie
+-zaadoptowanie zewnetrznej bibloteki do generowania wykresów
+-wykonanie modułu Raport (odpowiedzialnego za generowanie raportów graficzny,
+tabelarycznych, oraz export danych do exela)
+
+Sebastian Kowalski
+-stworzenie kodu html i css
+-wykonanie modułu Ankieter(odpowiedzialnego za tworzenie oraz zarządzanie
+kontami ankieterów)
+-skonfigurowanie środowiska testowego i środowiska produkcyjnego klienta
+
+Tomek Pietrzyk
+-wykonanie modułu Respondeci(odpowiedzialnego za dodawanie adresów
+email respondentów do bazy, import listy adresów z pliku i usuwanie respondentów)
+-wykonanie dokumentacji technicznej
+-wykonanie dokumentacji użytkownika
+
