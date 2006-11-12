@@ -1,38 +1,44 @@
 <?php
 include 'Zend.php';
-include '../app/models/Article.php';
-include '../app/models/Comments.php';
-
-Zend::loadClass('Zend_Controller_Front');
-
-
+include '../app/models/Uzytkownicy.php';
 
 function __autoload($class)
 {
     Zend::loadClass($class);
 }
 
+Zend::loadClass('Zend_Filter_Input');
+
+Zend::register('post', new Zend_Filter_Input($_POST));
+
+
+
 $params = array ('host'     => 'localhost',
                  'username' => 'root',
                  'password' => '',
-                 'dbname'   => 'data');
+                 'dbname'   => 'projekt5');
 
 $db = Zend_Db::factory('PDO_MYSQL', $params);
 Zend_Db_Table::setDefaultAdapter($db);
 Zend::register('db', $db);
 
-$view = new Zend_View;
-$view->setScriptPath('../app/views');
-Zend::register('view', $view);
-
-$router = new Zend_Controller_RewriteRouter();
-$router->addRoute('index', 'strona/:page', array('page' => 1, 'controller' => 'index', 'action' => 'index'));
-$router->addRoute('archive', 'archiwum/:year/:month/:day/:title', array('year' => 2006, 'controller' => 'index', 'action' => 'archive'));
-
 $controller = Zend_Controller_Front::getInstance();
 $controller->setControllerDirectory('../app/controllers');
+//$controller->registerPlugin(new Hamster_Controller_Plugin_First());
 
-$controller->setRouter($router);
+
+$user =  Hamster_Auth::getInstance();
+Zend::register('user', $user);
+
+
 
 $controller->dispatch();
+
+
+
+
+
+
+
+
 ?>

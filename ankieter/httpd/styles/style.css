@@ -1,11 +1,268 @@
 
-BODY{
-	margin: 20; 	
-	padding: 0; 
-	color:black; 
+body{
+margin:0; 	
+padding: 0; 
+color:black; 
+background:white;
+text-align: center;
+}
+body, p, td{
+font:13px verdana;
+}
+A:link{color:#6197CE; text-decoration:underline}
+A:visited{color:#6197CE;text-decoration:underline}
+A:active {color:#6197CE; TEXT-DECORATION: underline}
+A:hover{color:#6197CE;TEXT-DECORATION: none}
+
+img{
+float:left;
 }
 
-A:link{color:#FFC843; text-decoration:none}
-A:visited{color:#FFC843;text-decoration:none}
-A:active {color: #FFC843; TEXT-DECORATION: none}
-A:hover{color:black;TEXT-DECORATION: none}
+/* Layout */
+img.main{
+margin: 0px 5px;
+}
+
+
+#top{
+background:#144E56;
+height:60px;
+}
+#body{
+width:1000px;
+margin: 0px auto;
+
+}
+	#body td{
+	vertical-align:top;
+	}
+	#body #left{
+	padding-top:20px;
+	padding-right:20px;
+	width:100%;
+	}
+
+#navigation{
+vertical-align:bottom;
+}
+	#navigation ul{
+	list-style: none;
+	}
+	
+	#navigation li {
+  	float: left;
+	margin: 0 2px;
+  	}
+  	
+  	#navigation li a#bluebar{
+  	background: url(/images/blue_bar.jpg) #fff bottom left repeat-x;
+  	display: block;
+  	width:200px;
+  	height:24px;
+  	float: left;
+  	text-align: center;
+  	line-height: 24px;
+  	}
+  	
+  	#navigation li a#greenbar{
+  	background: url(/images/green_bar.jpg) #fff bottom left repeat-x;
+  	display: block;
+  	width:200px;
+  	height:24px;
+  	float: left;
+  	text-align: center;
+  	line-height: 24px;
+  	}
+  	
+  	#navigation li a#purplenbar{
+  	background: url(/images/purple_bar.jpg) #fff bottom left repeat-x;
+  	display: block;
+  	width:200px;
+  	height:24px;
+  	float: left;
+  	text-align: center;
+  	line-height: 24px;
+  	}
+  	
+  	#navigation li a#orangebar{
+  	background: url(/images/orange_bar.jpg) #fff bottom left repeat-x;
+  	display: block;
+  	width:200px;
+  	height:24px;
+  	float: left;
+  	text-align: center;
+  	line-height: 24px;
+  	}
+  	
+  	
+	#navigation li a:link {
+ 	text-decoration:none;
+ 	color: white;
+ 	font-weight:bold;
+	}
+  
+ 	#navigation li a:visited {
+  	text-decoration:none;
+  	color: white;
+  	font-weight:bold;
+  	}
+  
+  	#navigation li a:hover {
+  	text-decoration:none;
+  	font-weight:bold;
+  	}
+
+h1{
+font-size:14px;
+}
+
+
+#bluebox{
+margin-top:20px;
+margin-bottom:10px;
+width:215px;
+color:#7F7F7F;
+background:url(/images/blue_body.gif) repeat-y;
+}
+	#bluebox #bluebox_body{
+	background:url(/images/blue_head.jpg) no-repeat;
+	padding:34px 10px 0px 10px;
+	}
+	
+	#bluebox #bluebox_bottom{
+	background:url(/images/blue_bottom.jpg) no-repeat;
+	height:14px;
+	
+	}
+	
+	#bluebox .input_classic{
+	background:#DADEDF;
+	border:solid 1px #0874A5;
+	font:11px verdana;
+	}
+	
+	#bluebox #input_submit{
+	font:11px verdana;
+	}
+	
+	#bluebox form label{
+	font:11px tahoma;
+	font-weight:bold;
+	}
+	
+	#bluebox form div{
+	margin-top: 2px;
+	margin-bottom: 5px;
+	}
+	
+	
+	
+	
+	
+.header{
+background:#CBCAFA;
+width:450px;
+padding:5px;
+}
+
+
+
+.header2{
+background:#A0D1B5;
+width:450px;
+padding:5px;
+}
+
+.header3{
+background:#CF5E8E;
+width:450px;
+padding:5px;
+}	
+
+
+#editPoolHead{
+background:#ADACFD;
+width:300px;
+color:white;
+font-weight:bold;
+padding:5px;
+}
+
+#editPoolBox{
+border:solid 1px #ADACFD;
+background:#E2E1FE;
+padding:10px 10px 10px 10px;
+}
+
+#editPoolBox2{
+border:solid 1px #ADACFD;
+margin-top:10px;
+background:#E2E1FE;
+padding:10px;
+}
+
+
+.warning{
+	border:solid 1px #FDDA99;
+	background: url('/images/delete.png') 10px 10px no-repeat;
+	background-color:#FFFBDD;
+	margin:10px 00px 20px 00px;
+	width:414px;
+	padding:10px 10px 10px 35px;
+}
+
+
+
+.form_blue{
+background:#CBCAFA;
+width:450px;
+padding:5px;
+}	
+
+	.form_blue .input_classic{
+	
+	font:11px verdana;
+	}
+	
+	.form_blue #input_submit{
+	font:11px verdana;
+	}
+	
+	.form_blue form label{
+	font:11px tahoma;
+	
+	}
+	
+	.form_blue form div{
+	margin-top: 2px;
+	margin-bottom: 5px;
+	}
+
+
+#editTable{
+width:100%;
+background:#FFFBDD;
+margin-top:10px;
+}
+	#editTable .center{
+	text-align:center;
+	}
+
+	#editTable td{
+	border:solid 1px #FDDA99;
+	padding:3px;
+	}
+
+	#editTable .miniMenu{
+	width:70px;;
+	text-align:right;
+	
+	}
+	#editTable .bla{
+	margin-top:4px;
+	}
+	#editTable .miniMenu img{
+	padding:2px;
+	vertical-align:middle;
+	}
+	
