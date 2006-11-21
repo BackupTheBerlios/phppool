@@ -2,20 +2,20 @@
 <p>
 
 
-<h1>Utwórz konto ankietera</h1> 
-Nasz¹ misj¹ i celem nadrzêdnym jest wspieranie organizacji naszych klientów w osi¹gniêciu efektów biznesowych poprzez zdobywanie informacji i wiedzy dziêki zastosowaniu naszego systemu badañ online.
+<h1>Utwï¿½rz konto ankietera</h1> 
+Naszï¿½ misjï¿½ i celem nadrzï¿½dnym jest wspieranie organizacji naszych klientï¿½w w osiï¿½gniï¿½ciu efektï¿½w biznesowych poprzez zdobywanie informacji i wiedzy dziï¿½ki zastosowaniu naszego systemu badaï¿½ online.
 
-Dziêki wspó³pracy z naszymi partnerami strategicznymi nieustannie doskonalimy.
+Dziï¿½ki wspï¿½pracy z naszymi partnerami strategicznymi nieustannie doskonalimy.
 
 </p>
 <p>
 <div class="header">
-	<form action="/raport/graficzny" method="post" enctype="text/plain">
+	<form action="/admin/dodajAnkietera" method="post" >
 	<label for="ankieter_login">Login</label>
 	<div>
 	<?php echo $this->formText('ankieter_login', null, array('id'=>'ankieter_login', 'class'=>'input_classic')); ?>
 	</div>
-	<label for="ankiter_haslo">Has³o</label>
+	<label for="ankiter_haslo">Hasï¿½o</label>
 	<div>
 	<?php echo $this->formText('ankieter_haslo', null, array('id'=>'ankieter_haslo', 'class'=>'input_classic')); ?>
 	</div>
@@ -39,11 +39,11 @@ if(	$this->validationError){
 	
 </p>
 <p>
-<h1>Usuñ konto ankietera</h1> 
-Dziêki partnerstwu z firm¹ MaDoNET jesteœmy w stanie utrzymywaæ nasz serwis CBI na najwy¿szym poziomie przez 24h. Partnerstwo to jest gwarantem i¿ us³ugi œwiadczone poprze nasz serwis badañ online bêd¹ zawsze na najwy¿szym poziomie a nasi klienci nie musz¹ martwiæ siê o awarie sprzêtu czy oprogramowania.
+<h1>Usuï¿½ konto ankietera</h1> 
+Dziï¿½ki partnerstwu z firmï¿½ MaDoNET jesteï¿½my w stanie utrzymywaï¿½ nasz serwis CBI na najwyï¿½szym poziomie przez 24h. Partnerstwo to jest gwarantem iï¿½ usï¿½ugi ï¿½wiadczone poprze nasz serwis badaï¿½ online bï¿½dï¿½ zawsze na najwyï¿½szym poziomie a nasi klienci nie muszï¿½ martwiï¿½ siï¿½ o awarie sprzï¿½tu czy oprogramowania.
 </p>
 <p class="header">
-	<form action="/raport/graficzny" method="post" enctype="text/plain">
+	<form action="/admin/usunankietera" method="post" >
 	<label for="ankieter_login">Login:</label>
 	
 	<select name="ankieter_id">

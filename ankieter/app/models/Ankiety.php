@@ -4,7 +4,7 @@ class Hamster_Validation_Exception extends Exception{}
 class Ankiety extends Zend_Db_Table{
 	protected $_primary = 'id_ankieta';
 	//Zend_Filter_Exception
-	public function insert($data)
+	public function insert(&$data)
     {
         if (empty($data['nazwa'])) {
         	throw new Hamster_Validation_Exception('Podaj nazwę ankiety.');

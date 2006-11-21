@@ -1,6 +1,7 @@
 
 body{
 margin:0; 	
+margin-bottom:40px; 	
 padding: 0; 
 color:black; 
 background:white;
@@ -49,7 +50,9 @@ vertical-align:bottom;
 	list-style: none;
 	}
 	
-	#navigation li {
+	#navigation li,.limenu {
+	border:0px;
+	padding:0px;
   	float: left;
 	margin: 0 2px;
   	}
@@ -113,9 +116,11 @@ vertical-align:bottom;
   	}
 
 h1{
-font-size:14px;
+font-size:15px;
 }
-
+h2{
+font-size:13px;
+}
 
 #bluebox{
 margin-top:20px;
@@ -139,6 +144,7 @@ background:url(/images/blue_body.gif) repeat-y;
 	background:#DADEDF;
 	border:solid 1px #0874A5;
 	font:11px verdana;
+	
 	}
 	
 	#bluebox #input_submit{
@@ -182,12 +188,14 @@ padding:5px;
 
 #editPoolHead{
 background:#ADACFD;
-width:300px;
+
 color:white;
 font-weight:bold;
 padding:5px;
 }
-
+#editPoolHead a{
+color:white;
+}
 #editPoolBox{
 border:solid 1px #ADACFD;
 background:#E2E1FE;
@@ -219,9 +227,10 @@ width:450px;
 padding:5px;
 }	
 
-	.form_blue .input_classic{
+	#editPoolBox2 .input_classic{
 	
 	font:11px verdana;
+	width:330px;
 	}
 	
 	.form_blue #input_submit{
@@ -246,23 +255,54 @@ margin-top:10px;
 }
 	#editTable .center{
 	text-align:center;
+	width:140px;
 	}
 
 	#editTable td{
 	border:solid 1px #FDDA99;
 	padding:3px;
 	}
-
-	#editTable .miniMenu{
-	width:70px;;
-	text-align:right;
+	
+	#editTable .tab1{
+	width:25px;
+	}
+	
+	#editTable .tab2{
 	
 	}
+	
+	#editTable .tab3{
+	
+	}
+	
+	#editTable .tab4{
+	
+	text-align:center;
+	}
+	#editTable .tab5{
+	width:25px;
+	}
+
+	
 	#editTable .bla{
 	margin-top:4px;
 	}
-	#editTable .miniMenu img{
-	padding:2px;
-	vertical-align:middle;
-	}
+	#editTable  img{
+	padding-left:2px;
 	
+	}
+#move{
+
+padding-left:40px;
+}
+.move{
+
+padding-left:40px;
+}
+
+table.raport{	
+width:600px;
+}
+	table.raport .raportRight{
+	text-align:right;
+	}

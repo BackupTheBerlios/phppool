@@ -3,6 +3,69 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>Ankieter</title>
 <link rel="stylesheet" href="/styles/style.css" type="text/css">
+<link rel="stylesheet" href="/styles/tabs.css" type="text/css" media="print, projection, screen" />
+<!-- Additional IE/Win specific style sheet (Conditional Comments) -->
+<!--[if lte IE 7]>
+<link rel="stylesheet" href="/styles/tabs-ie.css" type="text/css" media="projection, screen" />
+<![endif]-->
+<script type="text/javascript" src="/scripts/jquery.js"></script>
+<script type="text/javascript" src="/scripts/jquery.tabs.js"></script>
+<script type='text/javascript' src='/scripts/jquery.editable.js'></script>
+<script type="text/javascript" src="/scripts/index_pagespecific.js"></script>
+<style type="text/css" media="screen, projection">
+            /* just to make this demo look a bit better */
+            * {
+                margin: 0;
+                padding: 0;
+            }
+            
+           
+           
+            
+            h3 {
+                 font-size: 12px;
+                margin: 0 0 1em;
+            }
+            ul {
+                list-style: none;
+            }
+            body>ul>li {
+                display: inline;
+            }
+            body>ul>li:before {
+                content: ", ";
+            }
+            body>ul>li:first-child:before {
+                content: "";
+            }
+            p, pre {
+                margin: 1em 0 0;
+            }
+            code {
+                font-family: "Courier New", Courier, monospace;
+            }
+            div {
+                margin:  0 0;
+              
+            }
+            div div {
+                margin: 0;
+                width: auto;
+            }
+            #container-9 div {
+                border: 1px solid #eaeaea;
+                background: transparent;
+            }
+            #container-9 div div {
+                border: 0;
+            }
+            #tested {
+                height: 300px;
+            }
+            #container-2{
+            	margin-top:10px;
+            }
+        </style>
 </head>
 <body>
 
@@ -23,27 +86,7 @@
 <table id="body"  cellspacing="0" cellpadding="0">
 	<tr>
 		<td id="left">
-<p>
-<img src="/images/eye.jpg" class="main">
-<h1> Możliwości i cechy systemu Ankieter SI</h1> 
-
-Z myślą o naszych klientach stworzyliśmy unikalny na naszym rynku system badań ankietowych online. 
-System sprawdzony w licznych zastosowaniach, przetestowany, elastyczny, skalowalny i wysoce wydajny. 
-Wszystko po to aby przedstawić unikalną ofertę - dotyczącą przygotowania i przeprowadzenia badania 
-ankietowego online.System dostępny jest od ponad 18 miesięcy i podlega dalszemu rozwojowi oraz udoskonalaniu 
-zgodnie z sugestiami wykorzystujących go klientów. Będąc od samego początku prac w stałym kontakcie ze 
-specjalistami ze strony <a href="/respondent/dodaj/">biznesu</a> jak również profesjonalistów z dziedziny badań opinii stworzyliśmy nową jakość na rynku badań online.
-</p>
-<p>
-<img src="/images/form.jpg" class="main">
-<h1> Przykłady ankiet</h1> 
-
-Zapraszamy do zapoznania się z przykładami badań ankietowych online dostępnych w naszym serwisie. 
-Udostępniliśmy sześć demonstracyjnych ankiet, które dostępne są zawsze w kolumnie po lewej stronie ekranu. 
-Przypominamy, iż ankiety demonstracyjne służą jedynie jako przykład możliwości systemu CBI e-ankieta.pl.
- Nie są to kompletne badania ankietowe a jedynie skromny wycinek kilku pytań dla zobrazowania mechanizmu i
-  jego możliwości.
-</p>
+<?php echo $this->body; ?>
 
 
 		</td>

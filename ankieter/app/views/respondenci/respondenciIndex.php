@@ -4,10 +4,10 @@ Dzięki współpracy z naszymi partnerami strategicznymi nieustannie doskonalimy
 </p>
 <p>
 <div class="header3">
-	<form action="/raport/graficzny" method="post" enctype="text/plain">
+	<form action="/respondenci/dodaj" method="post">
 	<label for="ankieta_opis">Email:</label>
 	
-	<?php echo $this->formText('ankieta_opis', null, array('id'=>'ankieta_opis', 'class'=>'input_classic')); ?>
+	<?php echo $this->formText('email', null, array('id'=>'ankieta_opis', 'class'=>'input_classic')); ?>
 	
 	</select>
 	<?php echo $this->formSubmit('send','Dodaj respondenta'); ?> 
