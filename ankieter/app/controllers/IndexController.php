@@ -1,5 +1,7 @@
 <?php
- 
+ include '../app/models/Ankiety.php';
+include '../app/models/Pytania.php';
+include '../app/models/WariantyOdpowiedzi.php';
 class IndexController extends Hamster_Controller_Action 
 {
     /**
@@ -9,6 +11,7 @@ class IndexController extends Hamster_Controller_Action
      */
     public function indexAction()
     {   
+         $this->view->body = $this->view->render('/index/indexIndex.php');
          $this->display();
     }
     /**
@@ -17,6 +20,7 @@ class IndexController extends Hamster_Controller_Action
   	public function loginAction()
   	{
   		//$filterPost = new Zend_Filter_Input($_POST);
+  		
   		$user = Zend::registry('user');
   		
   		$user->login($_POST['input_login'], $_POST['input_haslo']);
@@ -37,6 +41,19 @@ class IndexController extends Hamster_Controller_Action
   	public function unauthorizedAction()
   	{
   		echo 'nie masz dostępu do tej akcji';
+  	}
+  	public function pokazAction()
+  	{
+  		$pool = new Ankiety;
+  		$question = new Pytania;
+  		$variants = new WariantyOdpowiedzi;
+  		
+  		$row = $pool->find($this->_getParam('ankieta'));
+  		$this->view->pool = $row;
+  		
+  		
+  		$this->view->body = $this->view->render('/ankieta/ankietaPokaz.php');
+  		$this->display();
   	}
 }
 ?>
