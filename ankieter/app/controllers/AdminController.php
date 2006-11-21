@@ -3,14 +3,15 @@ include '../app/models/Uzytkownicy.php';
 class AdminController extends Hamster_Controller_Action 
 {
     /**
-     * Jedyne co musisz tutaj zrobiæ to wydobyæ z bazy danych dane na temat istnij¹cych kont
-     * ankieterów i wrzuciæ je do <SELECT> w widoku, tak aby by³o wiadomo jakie konto skasowaæ
+     * Jedyne co musisz tutaj zrobiï¿½ to wydobyï¿½ z bazy danych dane na temat istnijï¿½cych kont
+     * ankieterï¿½w i wrzuciï¿½ je do <SELECT> w widoku, tak aby byï¿½o wiadomo jakie konto skasowaï¿½
      * 
-     * Domyœlna akcja dla:	http://admin
+     * Domyï¿½lna akcja dla:	http://admin
      * lub:                 http://admin/index/ 			
      */
     public function indexAction()
     {     
+        
         $poll = new Uzytkownicy;
        	$this->view->validationError = $this->_getParam('validationError');
 		$this->view->poll = $poll->fetchAll();
@@ -20,32 +21,44 @@ class AdminController extends Hamster_Controller_Action
     /**
      * Akcja odpowiedzialna za dodanie konta ankietera
      * 
-     * walidacje danych, czy zakrótiki login, czy login ju¿ istnieje itd.
+     * walidacje danych, czy zakrï¿½tiki login, czy login juï¿½ istnieje itd.
      * zrobisz w modelu (nazwa modela to zapewne Uzytkownicy)
      */
     public function dodajAnkieteraAction()
     {   
-       	$post = Zend::registry('post');
-		$poll = new Uzytkownicy;
-		
+       	
+       	$post = new Zend_Filter_Input($_POST);
+       	$poll = new Uzytkownicy();
 		$data = array(
     		'login' => $post->getRaw('ankieter_login'),
-   			'haslo'  => $post->getRaw('ankieter_haslo'),
+   			'haslo' => $post->getRaw('ankieter_haslo'),
+   			'grupa' => 2
    			
 		);
 		try {
 			$id = $poll->insert($data);
-			$this->_forward('uzytkownicy','index');
+			$this->_forward('admin','index');
 		} catch (User_Validation_Exception $e){
-			$this->_forward('uzytkownicy','index', array('validationError'=>$e->getMessage()));
+			$this->_forward('admin','index', array('validationError'=>$e->getMessage()));
 		}
     }
     /**
      * Akcja odpowiedzialna za usuniecie konta ankietera
      */
-    public function usunankieteraAction()
+    
+     public function usunAnkieteraAction()
     {   
-       $this->display();
+		$post = new Zend_Filter_Input($_POST);
+		$poll = new Uzytkownicy;
+		$db = $poll->getAdapter();
+		$where = $db->quoteInto('login = ?', $post->getInt('ankieter_login'));
+
+		$rows_affected = $poll->delete($where);
+		
+		$this->_redirect('/admin');
+		
     }
+    
+    
 }
 ?>
