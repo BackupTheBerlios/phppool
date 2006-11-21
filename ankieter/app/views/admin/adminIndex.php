@@ -2,38 +2,58 @@
 <p>
 
 
-<h1>UtwÃ³rz konto ankietera</h1> 
-NaszÄ… misjÄ… i celem nadrzÄ™dnym jest wspieranie organizacji naszych klientÃ³w w osiÄ…gniÄ™ciu efektÃ³w biznesowych poprzez zdobywanie informacji i wiedzy dziÄ™ki zastosowaniu naszego systemu badaÅ„ online.
+<h1>Utwórz konto ankietera</h1> 
+Nasz¹ misj¹ i celem nadrzêdnym jest wspieranie organizacji naszych klientów w osi¹gniêciu efektów biznesowych poprzez zdobywanie informacji i wiedzy dziêki zastosowaniu naszego systemu badañ online.
 
-DziÄ™ki wspÃ³Å‚pracy z naszymi partnerami strategicznymi nieustannie doskonalimy.
+Dziêki wspó³pracy z naszymi partnerami strategicznymi nieustannie doskonalimy.
 
 </p>
 <p>
 <div class="header">
 	<form action="/raport/graficzny" method="post" enctype="text/plain">
-	<label for="ankieta_opis">Login</label>
+	<label for="ankieter_login">Login</label>
 	<div>
-	<?php echo $this->formText('ankieta_opis', null, array('id'=>'ankieta_opis', 'class'=>'input_classic')); ?>
+	<?php echo $this->formText('ankieter_login', null, array('id'=>'ankieter_login', 'class'=>'input_classic')); ?>
 	</div>
-	<label for="ankieta_opis">HasÅ‚o</label>
+	<label for="ankiter_haslo">Has³o</label>
 	<div>
-	<?php echo $this->formText('ankieta_opis', null, array('id'=>'ankieta_opis', 'class'=>'input_classic')); ?>
+	<?php echo $this->formText('ankieter_haslo', null, array('id'=>'ankieter_haslo', 'class'=>'input_classic')); ?>
 	</div>
-	</select>
-	<?php echo $this->formSubmit('send','Dodaj ankietera'); ?> 
+	
+	<?php echo $this->formSubmit('send','Dodaj ankietera',array('id'=>'input_submit')); ?>
 	</form>
-</div>	
+</div>
+
+
+<?php
+if(	$this->validationError){
+?>
+<div class="warning">
+<?php echo $this->validationError;
+?>
+</div>
+<?php
+}
+?>
+
+	
 </p>
 <p>
-<h1>UsuÅ„ konto ankietera</h1> 
-DziÄ™ki partnerstwu z firmÄ… MaDoNET jesteÅ›my w stanie utrzymywaÄ‡ nasz serwis CBI na najwyÅ¼szym poziomie przez 24h. Partnerstwo to jest gwarantem iÅ¼ usÅ‚ugi Å›wiadczone poprze nasz serwis badaÅ„ online bÄ™dÄ… zawsze na najwyÅ¼szym poziomie a nasi klienci nie muszÄ… martwiÄ‡ siÄ™ o awarie sprzÄ™tu czy oprogramowania.
+<h1>Usuñ konto ankietera</h1> 
+Dziêki partnerstwu z firm¹ MaDoNET jesteœmy w stanie utrzymywaæ nasz serwis CBI na najwy¿szym poziomie przez 24h. Partnerstwo to jest gwarantem i¿ us³ugi œwiadczone poprze nasz serwis badañ online bêd¹ zawsze na najwy¿szym poziomie a nasi klienci nie musz¹ martwiæ siê o awarie sprzêtu czy oprogramowania.
 </p>
 <p class="header">
 	<form action="/raport/graficzny" method="post" enctype="text/plain">
-	<label for="ankieta_opis">Login:</label>
-	<select>
+	<label for="ankieter_login">Login:</label>
 	
+	<select name="ankieter_id">
+	<?php
+	foreach ($this->poll as $row) {
+		echo '<option value="'.$row->idUzytkownik.'">'.$row->login.'</option>'."\n\t";
+	}
+	?>
 	</select>
-	<?php echo $this->formSubmit('send','Usun respondenta'); ?> 
+	
+	<?php echo $this->formSubmit('send','Usun ankietera'); ?> 
 	</form>
 </p>
