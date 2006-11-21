@@ -178,15 +178,8 @@ class AnkieterController extends Hamster_Controller_Action
   		$post = new Zend_Filter_Input($_POST);
   		Zend_Log::registerLogger(new Zend_Log_Adapter_File('../logs/simple.txt'));
   		$temp = $post->getRaw('name');
-  		$data = array(1, 23,99,1);
-  		$temp = $json = Zend_Json::encode($data);
   		
   		
-  		
-  		
-  		
-  		
-  		Zend_Log::log($temp);
   		$pos = stripos($temp, '=');
 		$temp = substr($temp,++$pos);
   		$temp = explode("&sort1[]=", $temp);
@@ -195,7 +188,7 @@ class AnkieterController extends Hamster_Controller_Action
   		$question = new Pytania;
     	$ranking = 1;
     	
-    	if(isset($temp) and 2==1){
+    	if(isset($temp)){
     		foreach($temp as $question_id) {
     			$row = $question->find($question_id);
     			$row->kolejnosc = $ranking;
