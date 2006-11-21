@@ -1,6 +1,6 @@
 <?php
 include 'Zend.php';
-include '../app/models/Uzytkownicy.php';
+
 
 function __autoload($class)
 {
@@ -9,7 +9,7 @@ function __autoload($class)
 
 Zend::loadClass('Zend_Filter_Input');
 
-Zend::register('post', new Zend_Filter_Input($_POST));
+
 
 
 
@@ -33,6 +33,11 @@ Zend::register('user', $user);
 
 
 $controller->dispatch();
+
+
+
+//include charts.php to access the InsertChart function
+
 
 
 
