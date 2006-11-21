@@ -2,9 +2,19 @@
 function serialize(s)
 {
 	serial = $.SortSerialize(s);
+	var myJSONObject = {"bindings": [
+        {"ircEvent": "PRIVMSG", "method": "newURI", "regex": "^http://.*"},
+        {"ircEvent": "PRIVMSG", "method": "deleteURI", "regex": "^delete.*"},
+        {"ircEvent": "PRIVMSG", "method": "randomURI", "regex": "^random.*"}
+    ]
+	};
 	
+	var myJSONText = myObject.toJSONString();
+	
+	
+	alert(myJSONText);
 	$.post("/ankieter/ajaxswap",{
-  		name: serial.hash,
+  		name: serial,
   		pool: 1
 	});
 }
