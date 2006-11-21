@@ -56,4 +56,5 @@ Dzi�ki partnerstwu z firm� MaDoNET jeste�my w stanie utrzymywa� nasz ser
 	
 	<?php echo $this->formSubmit('send','Usun ankietera'); ?> 
 	</form>
+
 </p>

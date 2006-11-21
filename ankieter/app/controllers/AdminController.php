@@ -45,7 +45,18 @@ class AdminController extends Hamster_Controller_Action
     /**
      * Akcja odpowiedzialna za usuniecie konta ankietera
      */
-    
+    public function usunAction()
+    {   
+		$post = new Zend_Filter_Input($_POST);
+		$poll = new Uzytkownicy;
+		$db = $poll->getAdapter();
+		$what = trim($post->noTags('ankieter_id'));
+		$where = $db->quoteInto('login = ?', $what);
+		$rows_affected = $poll->delete($where);
+		
+		$this->_redirect('/admin');
+		
+    }
     
     
     

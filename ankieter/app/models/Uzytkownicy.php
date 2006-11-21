@@ -60,7 +60,12 @@ class Uzytkownicy extends Zend_Db_Table
     /*
      * Funkacja nadpisuje metode delete
      */
-     
+     public function detele($login)
+     {
+   			$where = $db->quoteInto('login = ?',$login);
+    		$row = $this->fetchRow($where);
+			$deleteted =parent::delete($row->id_uzytkownik);
+     }
      
 }
 ?>
