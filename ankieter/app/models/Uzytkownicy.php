@@ -1,5 +1,13 @@
 <?php
 class User_Validation_Exception extends Exception{}
+class Users_Exception extends Exception {
+    /*
+     * Standardowy komunikat po wystapieniu bledu.
+     */  
+	
+	protected $message = "Wystapil blad typu Users_Exception.";	
+   
+}
 class Uzytkownicy extends Zend_Db_Table
 {
 	protected $_primary = 'id_uzytkownik';
@@ -17,6 +25,7 @@ class Uzytkownicy extends Zend_Db_Table
 	{
 		$db = $this->getAdapter();
 		$where = $db->quoteInto('login = ?',$login);
+		//$where = $db->quoteInto('id_uzytkownik = ?', $login);
 		$row = $this->fetchRow($where);
 			if($row->idUzytkownik == NULL) 
 			return true; 
@@ -60,12 +69,19 @@ class Uzytkownicy extends Zend_Db_Table
     /*
      * Funkacja nadpisuje metode delete
      */
-     public function detele($login)
-     {
-   			$where = $db->quoteInto('login = ?',$login);
-    		$row = $this->fetchRow($where);
-			$deleteted =parent::delete($row->id_uzytkownik);
-     }
+    
+   public function delete($where,$what)
+    {
+	
+     	if (empty($what)) {
+       		throw new Users_Exception('Nie ma takiego loginu.');
+       					}
+        	else if ($this->ifLogin($what)){
+			throw new Users_Exception('Podany login nie istnieje w bazie danych.');
+							}		
+		return parent::delete($where);
+		
+    }
      
 }
 ?>

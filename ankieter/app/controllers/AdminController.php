@@ -12,9 +12,9 @@ class AdminController extends Hamster_Controller_Action
     public function indexAction()
     {     
         
-        $poll = new Uzytkownicy;
+        $users = new Uzytkownicy;
        	$this->view->validationError = $this->_getParam('validationError');
-		$this->view->poll = $poll->fetchAll();
+		$this->view->poll = $users->fetchAll();
         $this->view->body = $this->view->render('/admin/adminIndex.php');
 		$this->display();
     }
@@ -28,7 +28,7 @@ class AdminController extends Hamster_Controller_Action
     {   
        	
        	$post = new Zend_Filter_Input($_POST);
-       	$poll = new Uzytkownicy();
+       	$users = new Uzytkownicy();
 		$data = array(
     		'login' => $post->getRaw('ankieter_login'),
    			'haslo' => $post->getRaw('ankieter_haslo'),
@@ -36,7 +36,7 @@ class AdminController extends Hamster_Controller_Action
    			
 		);
 		try {
-			$id = $poll->insert($data);
+			$id = $users->insert($data);
 			$this->_forward('admin','index');
 		} catch (User_Validation_Exception $e){
 			$this->_forward('admin','index', array('validationError'=>$e->getMessage()));
@@ -45,21 +45,26 @@ class AdminController extends Hamster_Controller_Action
     /**
      * Akcja odpowiedzialna za usuniecie konta ankietera
      */
-    public function usunAction()
+    public function usunankieteraAction()
     {   
+		
 		$post = new Zend_Filter_Input($_POST);
-		$poll = new Uzytkownicy;
-		$db = $poll->getAdapter();
-		$what = trim($post->noTags('ankieter_id'));
-		$where = $db->quoteInto('login = ?', $what);
-		$rows_affected = $poll->delete($where);
-		
-		$this->_redirect('/admin');
-		
+		$users= new Uzytkownicy();
+		$db = $users->getAdapter();
+		$what =$post->getInt('id_uzytkownik');
+		$where = $db->quoteInto('id_uzytkownik = ?', $what);
+
+		try{
+				$users->delete($where,$what);
+				$this->_redirect('/admin');
+				
+			} catch(Users_Exception $e){
+	
+				$this->_forward('admin','index',array('insertionError'=>$e->getMessage()));
+			
+				}
     }
-    
-    
-    
+      
     
 }
 ?>
