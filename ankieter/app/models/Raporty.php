@@ -38,7 +38,7 @@ class Raporty {
 		return $this->db->fetchPairs($sql,array('id_ankieta'=>$id));
 	}
 	public function InfoAboutQuestionId($id) {
-		$sql="Select pytanie, typ.nazwa nazwa_typu ".
+		$sql="Select kolejnosc, pytanie, typ.nazwa nazwa_typu ".
 			"from pytania, typy_odpowiedzi typ ".
 			"where pytania.id_typ_odpowiedzi=typ.id_typ_odpowiedzi and id_pytanie=:id_pytanie ";
 		return $this->db->fetchRow($sql,array('id_pytanie'=>$id));
@@ -55,6 +55,11 @@ class Raporty {
 			"where w.id_pytanie=:id_pytanie ".
 			"order by w.kolejnosc ";
 		return $this->db->fetchAssoc($sql,array('id_pytanie'=>$id));
+	}
+	public function AnswersOpened($id) {
+		$sql="select odpowiedz from odpowiedzi ".
+			"where id_pytanie=:id_pytanie";
+		return $this->db->fetchCol($sql,array('id_pytanie'=>$id));
 	}
 }
 
