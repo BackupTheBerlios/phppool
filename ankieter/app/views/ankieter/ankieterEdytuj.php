@@ -2,20 +2,9 @@
 function serialize(s)
 {
 	serial = $.SortSerialize(s);
-	var myJSONObject = {"bindings": [
-        {"ircEvent": "PRIVMSG", "method": "newURI", "regex": "^http://.*"},
-        {"ircEvent": "PRIVMSG", "method": "deleteURI", "regex": "^delete.*"},
-        {"ircEvent": "PRIVMSG", "method": "randomURI", "regex": "^random.*"}
-    ]
-	};
-	
-	var myJSONText = myObject.toJSONString();
-	
-	
-	alert(myJSONText);
+
 	$.post("/ankieter/ajaxswap",{
-  		name: serial,
-  		pool: 1
+  		hash: serial.hash
 	});
 }
         //]]></script>
@@ -36,7 +25,7 @@ function serialize(s)
 
 <form action="/ankieter/dodajpytanie/ankieta/<?php echo $this->poolId; ?>" method="post">
 	<label for="pytanie_tresc">Treść pytania</label>	
-	<?php echo $this->formText('pytanie_tresc', null, array('id'=>'ankieta_opis', 'class'=>'input_classic')); ?>
+	<?php echo $this->formText('pytanie_tresc', null, array('id'=>'ankieta_opis', 'class'=>'d')); ?>
 	<label for="pytanie_typ">Typ odpowiedzi</label>	
 	<select name="pytanie_typ">
 	<?php

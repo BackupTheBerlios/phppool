@@ -1,7 +1,4 @@
 <?php
-include '../app/models/Ankiety.php';
-include '../app/models/Pytania.php';
-include '../app/models/WariantyOdpowiedzi.php';
 class AnkieterController extends Hamster_Controller_Action 
 {
     /**
@@ -18,6 +15,10 @@ class AnkieterController extends Hamster_Controller_Action
         $this->view->body = $this->view->render('/ankieter/ankieterIndex.php');
 		$this->display();
     }
+    /**
+     * Wy�wietla pytania nale��ce do danej ankiety, 
+     * umo�liwia dodanie nowych pyta�
+     */
     public function edytujAction()
     {   
 		$post = new Zend_Filter_Input($_POST);
@@ -28,47 +29,48 @@ class AnkieterController extends Hamster_Controller_Action
 			$poolId = $post->getInt('ankieta_id');
 		}
 		$this->view->poolId = $poolId;
-		$this->view->pool = $poll->find($poolId);
-		
-		
+		$this->view->pool = $poll->find($poolId);	
 		$question = new Pytania();
 		$this->view->questions = $question->findAllWithAnkietaId($poolId);
-
 		$this->view->questionsVariants = array('jednokrotne', 'wielokrotne','otwarte');
-		
 		$this->view->body = $this->view->render('/ankieter/ankieterEdytuj.php');
 		$this->display();
     }
+    /**
+     * Usuw� dan� ankiet�
+     */
     public function usunAction()
     {   
 		$post = new Zend_Filter_Input($_POST);
 		$poll = new Ankiety;
 		$db = $poll->getAdapter();
 		$where = $db->quoteInto('id_ankieta = ?', $post->getInt('ankieta_id'));
-
 		$rows_affected = $poll->delete($where);
-		
-		$this->_redirect('/ankieter');
-		
+		$this->_redirect('/ankieter');	
     }
+    /**
+     * Tworzy now� ankiet� i przekierowuje do akcji edytujAction
+     */
     public function nowaAction()
     {   
        	$post = new Zend_Filter_Input($_POST);
        	$user = Zend::registry('user');
 		$poll = new Ankiety;
-		
 		$data = array(
     		'nazwa' => $post->getRaw('ankieta_nazwa'),
-   			'opis'  => $post->getRaw('ankieta_opis'),
-   			'id_uzytkownik'  => $user->getUserId(),
+    		'opis' => $post->getRaw('ankieta_opis'),
 		);
 		try {
 			$id = $poll->insert($data);
 			$this->_forward('ankieter','edytuj', array('ankieta'=>$id));
 		} catch (Hamster_Validation_Exception $e){
+			
 			$this->_forward('ankieter','index', array('validationError'=>$e->getMessage()));
 		}
     }
+    /**
+     * Dodaje pytanie do danej ankiety
+     */
     public function dodajpytanieAction()
     {
     	$post = new Zend_Filter_Input($_POST);
@@ -95,20 +97,20 @@ class AnkieterController extends Hamster_Controller_Action
     		
     }
     /**
-     * http://127.0.0.1/ankieter/usunpytanie/ankieta/1/pytanie/7
+     * Usuwa pytanie z danej ankiety
      */
     public function usunpytanieAction()
     {
     	$question = new Pytania;
     	$db = $question->getAdapter();
-    	
-    	
-    	 $where = $db->quoteInto('id_ankieta = ?', $this->_getParam('ankieta'))
+    	$where = $db->quoteInto('id_ankieta = ?', $this->_getParam('ankieta'))
     			.$db->quoteInto(' AND id_pytanie = ?', $this->_getParam('pytanie'));
-
 		$rows_affected = $question->delete($where);
 		$this->_forward('ankieter','edytuj', array('ankieta'=>$this->_getParam('ankieta')));
     }
+    /**
+     * Wy�wietla warianty odpowiedzi do danego pytania
+     */
     public function odpowiedziAction()
     {
     	$pool = new Ankiety;
@@ -126,11 +128,13 @@ class AnkieterController extends Hamster_Controller_Action
 		$where = $db->quoteInto('id_pytanie = ?', $this->_getParam('pytanie'));
 		$order = 'kolejnosc';
 		$this->view->variants = $variants->fetchAll($where,$order);
-		
-		
+
     	$this->view->body = $this->view->render('/ankieter/ankieterOdpowiedzi.php');
 		$this->display();
     }
+    /**
+     * Dodaje wariant odpowiedzi do danego pytania
+     */
     public function dodajodpowiedzAction()
     {
     	$post = new Zend_Filter_Input($_POST);
@@ -153,19 +157,18 @@ class AnkieterController extends Hamster_Controller_Action
 			$this->_forward('ankieter','odpowiedzi', array(	'ankieta'=>$this->_getParam('ankieta'), 
 															'pytanie'=>$this->_getParam('pytanie')));
 		} catch (Hamster_Validation_Exception $e){
-			//TODO inaczej odsłużyć błąd, gdzie indziej przekazać.. może widok błędu...
+			//TODO inaczej obsłużyć błąd
 			$this->_forward('ankieter','index', array('validationError'=>$e->getMessage()));
 		}
     }
+    /**
+     * Usuwa wariant odpowiedzi
+     */
     public function usunodpowiedzAction()
     {
     	$variants = new WariantyOdpowiedzi;
     	$db = $variants->getAdapter();
-    	
-    	
     	$where = $db->quoteInto('id_wariant_odpowiedzi = ?', $this->_getParam('odpowiedz'));
-    			
-
 		$rows_affected = $variants->delete($where);
 		$this->_forward('ankieter','odpowiedzi', array(	'ankieta'=>$this->_getParam('ankieta'), 
 														'pytanie'=>$this->_getParam('pytanie')));
@@ -176,20 +179,15 @@ class AnkieterController extends Hamster_Controller_Action
     public function ajaxswapAction()
   	{
   		$post = new Zend_Filter_Input($_POST);
-  		Zend_Log::registerLogger(new Zend_Log_Adapter_File('../logs/simple.txt'));
-  		$temp = $post->getRaw('name');
-  		
-  		
-  		$pos = stripos($temp, '=');
-		$temp = substr($temp,++$pos);
-  		$temp = explode("&sort1[]=", $temp);
-  		
-		
+  		$obj = new Hamster_JQuery_Sortables;
+		$obj->setHash($post->getRaw('hash'));
+  		$list = $obj->getSortArray();
+
   		$question = new Pytania;
     	$ranking = 1;
     	
-    	if(isset($temp)){
-    		foreach($temp as $question_id) {
+    	if(isset($list)){
+    		foreach($list as $question_id) {
     			$row = $question->find($question_id);
     			$row->kolejnosc = $ranking;
     			$row->save();
@@ -203,19 +201,17 @@ class AnkieterController extends Hamster_Controller_Action
 	 * Ustala nową kolejność wariantów odpowiedzi
 	 */
   	public function ajaxswapanswerAction()
-  	{
-  		$post = new Zend_Filter_Input($_POST);
-  		Zend_Log::registerLogger(new Zend_Log_Adapter_File('../logs/simple.txt'));
-  		$temp = $post->getRaw('name');
-  	
-  		$pos = stripos($temp, '=');
-		$temp = substr($temp,++$pos);
-  		$temp = explode("&sort2[]=", $temp);
+  	{ 
+		$post = new Zend_Filter_Input($_POST);
+  		$obj = new Hamster_JQuery_Sortables;
+		$obj->setHash($post->getRaw('hash'));
+  		$list = $obj->getSortArray();
   			
   		$variants = new WariantyOdpowiedzi;
   		$ranking = 1;
-  		if(isset($temp)){
-    		foreach($temp as $answer_id) {
+  		
+  		if(isset($list)){
+    		foreach($list as $answer_id) {
     			$row = $variants->find($answer_id);
     			$row->kolejnosc = $ranking;
     			$row->save();

@@ -4,8 +4,7 @@ function serialize(s)
 	serial = $.SortSerialize(s);
 	
 	$.post("/ankieter/ajaxswapanswer",{
-  		name: serial.hash,
-  		pool: 1
+  		hash: serial.hash
 	});
 }
         //]]></script>
