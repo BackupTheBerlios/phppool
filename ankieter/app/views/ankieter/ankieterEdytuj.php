@@ -17,9 +17,19 @@ function serialize(s)
 <div id="editPoolBox">
 
 <?php echo $this->pool->opis ?>
+<br>
+
 
 
 </div>
+
+<div id="editme1" class="edit_inline">Foo! Bar!</div>
+<div id="editme2" class="edit_inline">Bar! Foo!</div>
+<script type="text/javascript">
+$(document).ready(function() {
+	$(".edit_inline").editable("post.php");
+});
+</script>
 <div id="editPoolBox2">
 
 

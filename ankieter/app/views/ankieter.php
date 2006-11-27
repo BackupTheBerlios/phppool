@@ -19,9 +19,7 @@ body
 	font-family: Arial, Helvetica, sans-serif;
 	font-size: 11px;
 }
-.edit_inline{
-	display:inline;
-}
+
 .dupa{
 	text-align:right;
 	color:red;
