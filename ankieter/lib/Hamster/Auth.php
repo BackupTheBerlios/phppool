@@ -68,11 +68,12 @@ class Hamster_Auth{
 			$permission[2]['ankieter']['*'] = 1;
 			$permission[2]['index']['*'] = 1;
 			$permission[2]['raport']['*'] = 1;
-			$permission[2]['ankieta']['pokaz'] = 1;
+			$permission[2]['ankieta']['*'] = 1;
 			
 			$permission[1]['index']['*'] = 1;
 			$permission[1]['admin']['*'] = 1;
 			$permission[1]['respondenci']['*'] = 1;
+			$permission[2]['ankieta']['*'] = 1;
 			
 			$permission[0]['ankieta']['*'] = 1;
 			$permission[0]['admin']['dodajrespondent'] = 1;

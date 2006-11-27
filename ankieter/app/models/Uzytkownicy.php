@@ -37,7 +37,7 @@ class Uzytkownicy extends Zend_Db_Table
 	 * Funkcja kontroluje poprawnosc danych podczas
 	 * zakladania konta uzytkownika
 	 */
-	public function insert(&$data)
+	public function insert($data)
 
     {
 		if (!$this->ifLogin($data['login'])){
@@ -73,7 +73,18 @@ class Uzytkownicy extends Zend_Db_Table
      * Funkacja nadpisuje metode delete
      */
     
- 
+   public function delete($where)
+    {
+	
+     	if (empty($what)) {
+       		throw new Users_Exception('Nie ma takiego loginu.');
+       					}
+        	else if ($this->ifLogin($what)){
+			throw new Users_Exception('Podany login nie istnieje w bazie danych.');
+							}		
+		return parent::delete($where);
+		
+    }
      
 
 }
