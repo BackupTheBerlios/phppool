@@ -91,7 +91,7 @@
         <![endif]-->
 
         <script src="/scripts/jquery.js" type="text/javascript"></script>
-        <script src="/scripts/jquery.t3abs.js" type="text/javascript"></script>
+        <script src="/scripts/jquery.tabs.js" type="text/javascript"></script>
         <script type="text/javascript" src="/scripts/index_pagespecific.js"></script>
     </head>
     <body>
@@ -116,31 +116,36 @@
 	<h3>Start</h3>
 	<p>
 		Numery wszystkich pytań umieszczone są na dole ekranu. Można się poruszać między nimi klikając na numer pytania bądź strzałki w przód oraz w tył. 
-		Po odpowiedzi na ostanie pytanie prosimy zamknąć okno przeglądarki, co zakończy udział w badaniu
+		Po odpowiedzi na ostanie pytanie prosimy nacisnąć przycisk Wyślij.
 	</p>
 	<p>
 	</p>
 </div>
 		<?php
 		$counter=1;
-			echo $this->formSubmit('send','Wyślij');
+		
 		foreach($this->questions as $row){
 		?>
 		<div id="section-<?php echo $counter;?>" class="fragment">
 		<?php	
 			echo '<h3>'.$row->pytanie.'</h3>'."\n\r";
-			
-			foreach($this->variants[$row->idPytanie] as $nextRow){
-				if ($row->idTypOdpowiedzi==0){
-					echo '<div class="answerBox">'.$this->formRadio($row->idPytanie, null, null, array($nextRow->idWariantOdpowiedzi=>$nextRow->opis)).'</div>'."\n\r";
-				} else if($row->idTypOdpowiedzi==1) {
+			if($row->idTypOdpowiedzi==2){
 					echo '<div class="answerBox">';
-		
-					echo '<input type=checkbox name="'.$row->idPytanie.'['.$nextRow->idWariantOdpowiedzi.']"  />'.$nextRow->opis;
+					echo '<input type=text name="'.$row->idPytanie.'">';
 					echo '</div>'."\n\r";
+			} else {
+				foreach($this->variants[$row->idPytanie] as $nextRow){
+					if ($row->idTypOdpowiedzi==0){
+						echo '<div class="answerBox">'.$this->formRadio($row->idPytanie, null, null, array($nextRow->idWariantOdpowiedzi=>$nextRow->opis)).'</div>'."\n\r";
+					} else if($row->idTypOdpowiedzi==1) {
+						echo '<div class="answerBox">';
+								echo '<input type=checkbox name="'.$row->idPytanie.'['.$nextRow->idWariantOdpowiedzi.']"  />'.$nextRow->opis;
+						echo '</div>'."\n\r";
 					
-				}
+					} 
+				}	
 			}
+			
 			if($counter == $this->questions->count()) {
 					 echo '<div id="send">'.$this->formSubmit('send','Wyślij').'</div>'."\n\r";   
 				}
@@ -149,7 +154,7 @@
 		</div>
 		<?php	
 		}
-		echo $this->formSubmit('send','Wyślij');
+	
 		?>
 </div>	
 
