@@ -72,6 +72,7 @@ class Hamster_Auth{
 			
 			$permission[1]['index']['*'] = 1;
 			$permission[1]['admin']['*'] = 1;
+			$permission[1]['respondenci']['*'] = 1;
 			
 			$permission[0]['ankieta']['*'] = 1;
 			$permission[0]['admin']['dodajrespondent'] = 1;

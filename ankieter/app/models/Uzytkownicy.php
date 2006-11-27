@@ -18,6 +18,7 @@ class Uzytkownicy extends Zend_Db_Table
         $where.= $db->quoteInto("AND haslo = ?", $pass);
         return $this->fetchrow($where);
 	}
+
 	/*
 	 * Funkcja sprawdza czy dany login istnieje juz w bazie danych
 	 */
@@ -36,7 +37,8 @@ class Uzytkownicy extends Zend_Db_Table
 	 * Funkcja kontroluje poprawnosc danych podczas
 	 * zakladania konta uzytkownika
 	 */
-	public function insert($data)
+	public function insert(&$data)
+
     {
 		if (!$this->ifLogin($data['login'])){
 			throw new User_Validation_Exception('Podany login istnieje juz w bazie danych! Wybierz inny.');
@@ -66,22 +68,13 @@ class Uzytkownicy extends Zend_Db_Table
               
         return parent::insert($data);
     }
+
     /*
      * Funkacja nadpisuje metode delete
      */
     
-   public function delete($where,$what)
-    {
-	
-     	if (empty($what)) {
-       		throw new Users_Exception('Nie ma takiego loginu.');
-       					}
-        	else if ($this->ifLogin($what)){
-			throw new Users_Exception('Podany login nie istnieje w bazie danych.');
-							}		
-		return parent::delete($where);
-		
-    }
+ 
      
+
 }
 ?>
