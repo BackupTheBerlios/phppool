@@ -38,8 +38,7 @@ class AnkietaController extends Hamster_Controller_Action
   			foreach ($_POST as $questionId=>$answerT){
   				if (is_array($answerT)){
   					foreach ($answerT as $answerId => $value) {
-  						echo 'pytanie '.$questionId;
-  						echo '->'.$answerId.'<br>';
+  						
   						$data = array(
   						'id_wypelniona_ankieta' => $idFilledPool,
   						'id_pytanie' => $questionId,
@@ -48,8 +47,7 @@ class AnkietaController extends Hamster_Controller_Action
   						$id = $answer->insert($data);
   					}
   				} else {
-  					echo 'pytanie '.$questionId;
-  					echo '->'.$answerT;
+  					
   					$data = array(
   						'id_wypelniona_ankieta' => $idFilledPool,
   						'id_pytanie' => $questionId,
