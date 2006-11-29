@@ -3,6 +3,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>Raporty</title>
 <link rel="stylesheet" href="/styles/style.css" type="text/css">
+
+  
 </head>
 <body>
 
@@ -32,7 +34,5 @@
 		</td>
 	</tr>
 </table>
-</div>
-<img src="/index.php">
 </body>
 </html>

@@ -61,6 +61,12 @@ class Raporty {
 			"where id_pytanie=:id_pytanie";
 		return $this->db->fetchCol($sql,array('id_pytanie'=>$id));
 	}
+	
+	public function AmountOfRespondentsWhoAnsweredId($id) {
+		$sql="select count(distinct id_wypelniona_ankieta) as ilResp from odpowiedzi ".
+			"where id_pytanie=:id_pytanie";
+		return $this->db->fetchRow($sql,array('id_pytanie'=>$id));	
+	}
 }
 
 ?>
