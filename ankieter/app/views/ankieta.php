@@ -99,7 +99,7 @@
 
         <h2><?php echo $this->pool->nazwa; ?></h2>
         <p><?php echo $this->pool->opis; ?></p>
-<form action="/ankieta/pokaz/ankieta/1" method="post">        
+<form action="/ankieta/pokaz/ankieta/<?php echo $this->pool->idAnkieta; ?>" method="post">        
 <div id="container-1">	
 <ul class="anchors">
 	<li><a href="#section-0">Start</a></li>
@@ -136,7 +136,10 @@
 			} else {
 				foreach($this->variants[$row->idPytanie] as $nextRow){
 					if ($row->idTypOdpowiedzi==0){
-						echo '<div class="answerBox">'.$this->formRadio($row->idPytanie, null, null, array($nextRow->idWariantOdpowiedzi=>$nextRow->opis)).'</div>'."\n\r";
+						//echo '<div class="answerBox">'.$this->formRadio($row->idPytanie, null, null, array($nextRow->idWariantOdpowiedzi=>$nextRow->opis)).'</div>'."\n\r";
+						echo '<div class="answerBox">';
+								echo '<input type=radio name="'.$row->idPytanie.'" value="'.$nextRow->idWariantOdpowiedzi.'" />'.$nextRow->opis;
+								echo '</div>'."\n\r";
 					} else if($row->idTypOdpowiedzi==1) {
 						echo '<div class="answerBox">';
 								echo '<input type=checkbox name="'.$row->idPytanie.'['.$nextRow->idWariantOdpowiedzi.']"  />'.$nextRow->opis;
