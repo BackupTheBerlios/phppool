@@ -4,7 +4,7 @@ Istnieje wiele zastosowań badań ankietowych, sond, kwestionariuszy czy formula
 Poniżej zamieszczamy krótką listę z przykładami możliwych zastosowań z różnych dziedzin dla których właśnie nasze propozycje rozwiązań realizacji badań ankietowych wydają się być wartościowe i przydatne.</p>
 </p>
 <p class="header2">
-	<form action="/raport/graficzny" method="post">
+	<form action="/raport/wyborWykresu" method="post">
 	Wybierz ankiete:
 	<select name="ankieta_id">
 	<?php

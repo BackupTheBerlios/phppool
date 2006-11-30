@@ -1,7 +1,5 @@
-<p>
 <h1> Statystyki ogólne</h1> 
 <p>Informacje zbiorcze o ankiecie.</p>
-</p>
 
 
 <div id="editPoolHead"> 
@@ -13,7 +11,6 @@
 
 </div>
 <div id="editPoolBox2">
-<p>
 	
   <table id="raportTable" cellspacing="0" cellpadding="0" border="0">
     <tr><th>Ankieter			</th><td colspan="3"><?php echo $this->info["login"]; ?></td></tr>
@@ -25,9 +22,9 @@
     <tr align="center">			<td><?php echo $this->ques[$this->qV['jednokrotne']]; ?></td><td><?php echo $this->ques[$this->qV['wielokrotne']]; ?></td><td><?php echo $this->ques[$this->qV['otwarte']]; ?></td></tr>
   </table>
   
-</p>
 </div>
 <br><br>
+<!--
 <div id="editPoolBox">
 <form action="/raport/tabelaryczny/ankieta/<?php echo $this->pollId; ?>" method="post">
 	<p>Wybierz pytanie z listy</p> 
@@ -42,6 +39,9 @@
 	<?php echo $this->formSubmit('send','Pokaz statystyki'); ?>
 </form>
 
-
- 
 </div>
+-->
+
+<BR><BR>
+<h1> Statystyki szczegółowe</h1> 
+<p>Informacje o danym pytaniu z ankiety.</p>
