@@ -1,15 +1,11 @@
-<h1> Statystyki ogólne</h1> 
-<p>Informacje zbiorcze o ankiecie.</p>
+<h1>Raport Tabelaryczny</h1> 
 
 
-<div id="editPoolHead"> 
+
+
 <?php echo $this->pool->nazwa ?>
-</div>
-<div id="editPoolBox">
 
-<?php echo $this->pool->opis ?>
 
-</div>
 <div id="editPoolBox2">
 	
   <table id="raportTable" cellspacing="0" cellpadding="0" border="0">
@@ -24,24 +20,6 @@
   
 </div>
 <br><br>
-<!--
-<div id="editPoolBox">
-<form action="/raport/tabelaryczny/ankieta/<?php echo $this->pollId; ?>" method="post">
-	<p>Wybierz pytanie z listy</p> 
-	
-	<Select name="pytanie_id" class="select">
-		<?php
-		foreach ($this->questions as $row) {
-			echo '<option value="'.$row->idPytanie.'">'.$row->kolejnosc.". &nbsp;$nbsp\t".$row->pytanie.'</option> \n';
-		}
-		?>
-	</Select>
-	<?php echo $this->formSubmit('send','Pokaz statystyki'); ?>
-</form>
 
-</div>
--->
 
-<BR><BR>
-<h1> Statystyki szczegółowe</h1> 
-<p>Informacje o danym pytaniu z ankiety.</p>
+

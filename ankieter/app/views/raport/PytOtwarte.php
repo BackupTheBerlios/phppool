@@ -1,6 +1,5 @@
-<br><br><br><br><br>
-<h1> Statystyki szczegółowe</h1> 
-<p>Informacje o danym pytaniu z ankiety.</p>
+
+
 <div id="editPoolHead2"> 
 <?php echo $this->queInfo["pytanie"] ?>
 </div>

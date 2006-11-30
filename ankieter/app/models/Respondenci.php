@@ -73,15 +73,15 @@ class Respondenci extends Zend_Db_Table{
  * gdy nie ma danego emaila w bazie lub
  * gdy wpisany email jest NULL
  */
-        public function delete($where)
+    public function delete($what)
     {
-	
-     	if (empty($what)) {
-       		throw new Respondenci_Exception('Podaj adres e-mail.');
-       					}
-        	else if ($this->emailExist($what)){
-			throw new Respondenci_Exception('Podany adres e-mail nie istnieje 						 w bazie danych.');
-							}		
+		$db = $this->getAdapter();
+
+		$where = $db->quoteInto('e_mail = ?', $what);	
+     	if ($this->emailExist($what)){
+			throw new Respondenci_Exception('Podany adres e-mail nie istnieje  w bazie danych.');
+     	}
+									
 		return parent::delete($where);
     } 
 

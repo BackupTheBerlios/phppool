@@ -1,6 +1,4 @@
-<br><br><br><br><br>
-<h1> Statystyki szczegółowe</h1> 
-<p>Informacje o danym pytaniu z ankiety.</p>
+
 <div id="editPoolHead2"> 
 <?php echo $this->queInfo["pytanie"] ?>
 </div>
@@ -15,7 +13,7 @@
    			$suma=0;
    			foreach($this->ansInfo as $kolejnosc => $ansInfo) $suma+=$ansInfo["ilosc"];
    			foreach($this->ansInfo as $kolejnosc => $ansInfo)
-   				echo "<tr><td>".$kolejnosc.". </td><td>".$ansInfo['opis']."</td><td>".$ansInfo['ilosc']."</td><td>".($ansInfo["ilosc"]*100/$suma)."% </td></tr>\n";
+   				echo "<tr><td>".$kolejnosc.". </td><td>".$ansInfo['opis']."</td><td>".$ansInfo['ilosc']."</td><td>".(round($ansInfo["ilosc"]*100/$suma))."% </td></tr>\n";
    		?>
   	</table>
   

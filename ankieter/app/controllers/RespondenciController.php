@@ -49,13 +49,10 @@ class RespondenciController extends Hamster_Controller_Action
 		$post = new Zend_Filter_Input($_POST);
 		$respondent= new Respondenci();
 		
-		$db = $respondent->getAdapter();
 		$what = trim($post->noTags('Umail'));
-	
-		$where = $db->quoteInto('e_mail = ?', $what);
 
-		   try{
-				$respondent->delete($where,$what);
+		try{
+				$respondent->delete($what);
 				$this->_redirect('/respondenci/');
 				
 			} catch(Respondenci_Exception $e){

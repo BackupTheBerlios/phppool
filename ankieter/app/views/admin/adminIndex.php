@@ -43,7 +43,7 @@ if(	$this->validationError){
 Dzięki partnerstwu z firmą MaDoNET jesteśmy w stanie utrzymywać nasz serwis CBI na najwyższym poziomie przez 24h. Partnerstwo to jest gwarantem iż usługi świadczone poprze nasz serwis badań online będą zawsze na najwyższym poziomie a nasi klienci nie muszą martwić się o awarie sprzętu czy oprogramowania.
 </p>
 <p class="header">
-	<form action="/admin/usun" method="post" >
+	<form action="/admin/usunankietera" method="post" >
 	<label for="ankieter_login">Login:</label>
 	
 	<select name="ankieter_id">

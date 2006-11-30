@@ -61,20 +61,6 @@ class AdminController extends Hamster_Controller_Action
 		$this->_forward('admin','index');
 		
 
-		$users= new Uzytkownicy();
-		$db = $users->getAdapter();
-		$what =$post->getInt('id_uzytkownik');
-		$where = $db->quoteInto('id_uzytkownik = ?', $what);
-
-		try{
-				$users->delete($where,$what);
-				$this->_redirect('/admin');
-				
-			} catch(Users_Exception $e){
-	
-				$this->_forward('admin','index',array('insertionError'=>$e->getMessage()));
-			
-				}
 
     }
       

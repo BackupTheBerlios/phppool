@@ -1,11 +1,9 @@
-<div id="editPoolHead"> 
-<?php echo $this->pool->nazwa ?>
-</div>
+<h1>Raport Tabelaryczny</h1> 
 
-<div id="editPoolBox">
-<?php echo $this->pool->opis ?>
-</div>
-<BR>
+
+
+
+<?php echo $this->pool->nazwa ?>
 <table align="center">
 <?php 
 	foreach ($this->questions as $row) {
