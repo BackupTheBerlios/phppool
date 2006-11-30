@@ -59,6 +59,7 @@ class AnkieterController extends Hamster_Controller_Action
 		$data = array(
     		'nazwa' => $post->getRaw('ankieta_nazwa'),
     		'opis' => $post->getRaw('ankieta_opis'),
+    		'id_uzytkownik' => 1
 		);
 		try {
 			$id = $poll->insert($data);
