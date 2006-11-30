@@ -306,21 +306,12 @@ width:600px;
 	table.raport .raportRight{
 	text-align:right;
 	}
-	
-	
-table.raport{	
-width:600px;
-}
-	table.raport .raportRight{
-	text-align:right;
-	}
 
 	
 
 #raportTable{
 	width:70%;
-background:#FFFBFF;
-background:#FFFF9A;
+background:#EAEEEF;
 margin-top:10px;
 }
 	#raportTable .center{
@@ -328,10 +319,15 @@ margin-top:10px;
 	}
 
 	#raportTable td{
-	border:solid 1px #AFBBFF;
+	border:solid 1px #E1E5E6;
 	padding:3px;
 	font-weight:bold;
 	font-size:10px;
+	vertical-align:middle;
+	}
+	
+	#raportTable td graf {
+		border:0px;
 	}
 	
 	#raportTable .pytanie {
@@ -349,7 +345,6 @@ margin-top:10px;
 	font-weight:bold;
 	padding:5px;
 	}
-
 	
 .select{
 	background:#ADACFD;
