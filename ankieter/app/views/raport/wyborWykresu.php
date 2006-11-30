@@ -28,7 +28,7 @@
 			case 2: $addBarV=' disabled="disabled" '; $addBarH='  disabled="disabled"  '; $addPie=' disabled="disabled" ';
 			break;
 		}
-		echo "<tr><td>".$row->kolejnosc.". </td><td style='text-align:left;'>".$row->pytanie."</td><td>".$row->idTypOdpowiedzi."</td>";
+		echo "<tr><td>".$row->kolejnosc.". </td><td style='text-align:left;'>".$row->pytanie."</td><td><img src='/images/imans".$row->idTypOdpowiedzi.".gif' align='center' valign='center'></td>";
 		echo 	'<td><input type="radio" name="'.$row->idPytanie.'" value="0" '.$addBarV.'></td>';
 		echo 	'<td><input type="radio" name="'.$row->idPytanie.'" value="1" '.$addBarH.'></td>';
 		echo 	'<td><input type="radio" name="'.$row->idPytanie.'" value="2" '.$addPie.'></td>';
