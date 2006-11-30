@@ -4,7 +4,7 @@
 <title>Ankieter</title>
 <link rel="stylesheet" href="/styles/style.css" type="text/css">
 <script type="text/javascript" src="/scripts/jquery.js"></script>
-<script type='text/javascript' src='/scripts/jquery.editable.js'></script>
+<script type='text/javascript' src='/scripts/jquery.jeditable.js '></script>
 <script type="text/javascript" src="/scripts/ankieter_pagespecific.js"></script>
 <script type="text/javascript" src="/scripts/iutil.js"></script>
 <script type="text/javascript" src="/scripts/idrag.js"></script>

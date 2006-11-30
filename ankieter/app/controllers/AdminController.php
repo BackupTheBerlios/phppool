@@ -26,9 +26,11 @@ class AdminController extends Hamster_Controller_Action
      */
     public function dodajAnkieteraAction()
     {   
-       	
+
        	$post = new Zend_Filter_Input($_POST);
+
        	$users = new Uzytkownicy();
+
 		$data = array(
     		'login' => $post->getRaw('ankieter_login'),
    			'haslo' => $post->getRaw('ankieter_haslo'),
@@ -49,6 +51,16 @@ class AdminController extends Hamster_Controller_Action
     {   
 		
 		$post = new Zend_Filter_Input($_POST);
+
+		$user = new Uzytkownicy;
+		$db = $user->getAdapter();
+		
+		$where = $db->quoteInto('id_uzytkownik = ?', $post->getRaw('ankieter_id'));
+		$rows_affected = $user->delete($where);
+		
+		$this->_forward('admin','index');
+		
+
 		$users= new Uzytkownicy();
 		$db = $users->getAdapter();
 		$what =$post->getInt('id_uzytkownik');
@@ -63,6 +75,7 @@ class AdminController extends Hamster_Controller_Action
 				$this->_forward('admin','index',array('insertionError'=>$e->getMessage()));
 			
 				}
+
     }
       
     

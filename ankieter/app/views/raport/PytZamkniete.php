@@ -1,27 +1,25 @@
+<br><br><br><br><br>
+<h1> Statystyki szczegółowe</h1> 
+<p>Informacje o danym pytaniu z ankiety.</p>
 <div id="editPoolHead2"> 
-<?php echo $this->queInfo["kolejnosc"].". ".$this->queInfo["pytanie"] ?>
+<?php echo $this->queInfo["pytanie"] ?>
 </div>
 <div id="editPoolBox">
 
-	<table id="raportTable" cellspacing="0" cellpadding="0" border="0">
-  		<tr ><th colspan="2">Typ odpowiedzi</th><td colspan="2"><?php echo $this->queInfo["nazwa_typu"];?></td></tr>  		
-    	<?php
-    		printf("<tr><th colspan='2'>Ilosc respondentów<br>która nie udzieliła odpowiedzi</th><td valign='middle'>%d</td><td valign='middle' align='right'>%6.2f %%</td></tr>", $this->fill["fill"]-$this->ilResp, $this->fill["fill"]?($this->fill["fill"]-$this->ilResp)*100/$this->fill["fill"]:0);
-    	?>
-    	<tr><th style="width:20px">Nr</th><th>Wariant odpowiedzi</th><th>ilość wskazań</th><th>%</th></tr>
+<p>
+
+	<table id="raportTable" class="pytanie" cellspacing="0" cellpadding="0" border="0">
+  		<tr><th colspan="2">Typ odpowiedzi</th><td colspan="2"><?php echo $this->queInfo["nazwa_typu"];?></td></tr>
+    	<tr><th width="0">Nr</th><th>Wariant odpowiedzi</th><th>ilość zaznaczeń</th><th>%</th></tr>
    		<?php
-   			if ($this->queInfo["nazwa_typu"]=="jednokrotne") {
-   				$ilosc=0;
-   				foreach($this->ansInfo as $kolejnosc => $ansInfo) $ilosc+=$ansInfo["ilosc"];
-   			} else $ilosc=$this->fill["fill"];
+   			$suma=0;
+   			foreach($this->ansInfo as $kolejnosc => $ansInfo) $suma+=$ansInfo["ilosc"];
    			foreach($this->ansInfo as $kolejnosc => $ansInfo)
-   				printf("<tr><td>%d.</td><td>%s</td><td>%d</td><td align='right'>%6.2f %%</td></tr>\n", $kolejnosc, $ansInfo['opis'], $ansInfo['ilosc'], ($ilosc?($ansInfo["ilosc"]*100/$ilosc):"???"));
+   				echo "<tr><td>".$kolejnosc.". </td><td>".$ansInfo['opis']."</td><td>".$ansInfo['ilosc']."</td><td>".($ansInfo["ilosc"]*100/$suma)."% </td></tr>\n";
    		?>
   	</table>
   
+</p>
 </div>
-<BR>
-<HR>
-<BR>
-<BR>
+<BR><BR>
 

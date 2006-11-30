@@ -4,9 +4,9 @@ Istnieje wiele zastosowań badań ankietowych, sond, kwestionariuszy czy formula
 Poniżej zamieszczamy krótką listę z przykładami możliwych zastosowań z różnych dziedzin dla których właśnie nasze propozycje rozwiązań realizacji badań ankietowych wydają się być wartościowe i przydatne.</p>
 </p>
 <p class="header2">
-	<form action="/raport/graficzny" method="post" >
+	<form action="/raport/graficzny" method="post">
 	Wybierz ankiete:
-	<select name="form_ankieta">
+	<select name="ankieta_id">
 	<?php
 	foreach ($this->polls as $row) {
 		echo '<option value="'.$row->idAnkieta.'">'.$row->nazwa.'</option>';
@@ -27,7 +27,7 @@ Wszystko dla wielowymiarowych korzyści i satysfakcji naszych klientów
 <p class="header2">
 	<form action="/raport/tabelaryczny" method="post">
 	Wybierz ankiete:
-	<select name="form_ankieta">
+	<select name="ankieta_id">
 	<?php
 	foreach ($this->polls as $row) {
 		echo '<option value="'.$row->idAnkieta.'">'.$row->nazwa.'</option>';
@@ -42,9 +42,9 @@ Wszystko dla wielowymiarowych korzyści i satysfakcji naszych klientów
 Dzięki partnerstwu z firmą MaDoNET jesteśmy w stanie utrzymywać nasz serwis CBI na najwyższym poziomie przez 24h. Partnerstwo to jest gwarantem iż usługi świadczone poprze nasz serwis badań online będą zawsze na najwyższym poziomie a nasi klienci nie muszą martwić się o awarie sprzętu czy oprogramowania.
 </p>
 <p  class="header2">
-	<form action="/raport/export" method="post" enctype="text/plain">
+	<form action="/raport/export" method="post">
 	Wybierz ankiete:
-	<select name="form_ankieta">
+	<select name="ankieta_id">
 	<?php
 	foreach ($this->polls as $row) {
 		echo '<option value="'.$row->idAnkieta.'">'.$row->nazwa.'</option>';

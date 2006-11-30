@@ -23,22 +23,9 @@ function serialize(s)
 
 </div>
 
-<h1 class="edit" id="header_1">Foo</h1>
-<h2 class="edit" id="header_2">Bar</h2>
-<div class="edit_area" id="paragraph_1">Lorem ipsum</div>
+
 <div id="editPoolBox2">
-<script type="text/javascript">
-$(document).ready(function() {
-    $(".edit").editable("http://www.example.com/save.php", { 
-        indicator : "Saving...",
-        type : 'text'
-    });
-    $(".edit_area").editable("http://www.example.com/save.php", { 
-        indicator : "<img src='img/indicator.gif'>",
-        type : 'textarea'
-    });
-});
-</script>
+
 <form action="/ankieter/dodajpytanie/ankieta/<?php echo $this->poolId; ?>" method="post">
 	<label for="pytanie_tresc">Treść pytania</label>	
 	<?php echo $this->formText('pytanie_tresc', null, array('id'=>'ankieta_opis', 'class'=>'d')); ?>
