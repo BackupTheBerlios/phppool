@@ -76,12 +76,7 @@ class Uzytkownicy extends Zend_Db_Table
    public function delete($where)
     {
 	
-     	if (empty($what)) {
-       		throw new Users_Exception('Nie ma takiego loginu.');
-       					}
-        	else if ($this->ifLogin($what)){
-			throw new Users_Exception('Podany login nie istnieje w bazie danych.');
-							}		
+     
 		return parent::delete($where);
 		
     }
