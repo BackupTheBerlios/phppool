@@ -57,3 +57,13 @@ Dzięki partnerstwu z firmą MaDoNET jesteśmy w stanie utrzymywać nasz serwis 
 	<?php echo $this->formSubmit('send','Usun respondenta'); ?> 
 	</form>
 </p>
+<?php
+if(	$this->deleteError){
+?>
+<div class="warning">
+<?php echo $this->deleteError;
+?>
+</div>
+<?php
+}
+?>

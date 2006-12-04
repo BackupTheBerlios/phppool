@@ -10,6 +10,7 @@ class RespondenciController extends Hamster_Controller_Action
 	{
 		$respondent= new Respondenci();
 		$this->view->insertionError = $this->_getParam('insertionError');
+		$this->view->deleteError = $this->_getParam('deleteError');
 		$this->view->respondent = $respondent->fetchAll();
 		
 		$this->view->body = 			$this->view->render('/respondenci/respondenciIndex.php');
@@ -57,7 +58,7 @@ class RespondenciController extends Hamster_Controller_Action
 				
 			} catch(Respondenci_Exception $e){
 	
-	$this->_forward('respondenci','index',array('insertionError'=>$e->getMessage()));
+	$this->_forward('respondenci','index',array('deleteError'=>$e->getMessage()));
 			
 							}		
 	}
