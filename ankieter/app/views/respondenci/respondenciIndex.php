@@ -1,6 +1,15 @@
-<p>
+﻿<p>
 
-
+<?php
+if(	$this->insertionError){
+?>
+<div class="warning">
+<?php echo $this->insertionError;
+?>
+</div>
+<?php
+}
+?>
 
 <h1> Dodaj pojędynczego respondenta</h1> 
 Dzięki współpracy z naszymi partnerami strategicznymi nieustannie doskonalimy nasz serwis CBI po to aby oferować naszym klientom najwyższej jakości produkt skierowany do badań ankietowych w internecie. Wszystko dla wielowymiarowych korzyści i satysfakcji naszych klientów</p>
@@ -16,16 +25,7 @@ Dzięki współpracy z naszymi partnerami strategicznymi nieustannie doskonalimy
 	<?php echo $this->formSubmit('send','Dodaj respondenta'); ?> 
 	</form>
 </div>
-<?php
-if(	$this->insertionError){
-?>
-<div class="warning">
-<?php echo $this->insertionError;
-?>
-</div>
-<?php
-}
-?>
+
 <h1>Import adresów email z pliku</h1> 
 Naszą misją i celem nadrzędnym jest wspieranie organizacji naszych klientów w osiągnięciu efektów biznesowych poprzez zdobywanie informacji i wiedzy dzięki zastosowaniu naszego systemu badań online.
 
@@ -34,7 +34,7 @@ Dzięki współpracy z naszymi partnerami strategicznymi nieustannie doskonalimy
 Wszystko dla wielowymiarowych korzyści i satysfakcji naszych klientów
 </p>
 <p class="header3">
-	<form action="/respondenci/import" method="post" >
+	<form action="/respondenci/import" method="post" ENCTYPE="multipart/form-data">
 	<label for="Imail">Plik:</label>
 	
 	<?php echo $this->formFile('Imail', null, array('id'=>'Imail', 'class'=>'input_classic')); ?>
@@ -57,13 +57,14 @@ Dzięki partnerstwu z firmą MaDoNET jesteśmy w stanie utrzymywać nasz serwis 
 	<?php echo $this->formSubmit('send','Usun respondenta'); ?> 
 	</form>
 </p>
-<?php
-if(	$this->deleteError){
-?>
-<div class="warning">
-<?php echo $this->deleteError;
-?>
-</div>
-<?php
-}
-?>
+
+<h1>Edytuj listę respondentów</h1> 
+Każdy wprowadzony e-mail można bardzo łatwo wyedytować lub skasować. Została do tego celu przygotowana specjalna funkcja. Wysterczy  że naciśniesz na ponieżyszy przycisk i od razu możesz zabrać się do pracy. Powodzenia...
+</p>
+<p class="header3">
+	<form action="/respondenci/edytuj/page/1" method="post" >
+	<?php echo $this->formSubmit('send','Edytuj listę respondentów'); ?> 
+	</form>
+</p>
+<br />
+<br />
