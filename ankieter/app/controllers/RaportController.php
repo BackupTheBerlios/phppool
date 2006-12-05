@@ -75,6 +75,7 @@ class RaportController extends Hamster_Controller_Action
 
     	
     	$gTypes=array();
+    	$wyjatki=array();
     	foreach ($this->view->questions as $row) {
     		$queId=$row->idPytanie;	
     		$queInfo=$rap->InfoAboutQuestionId($queId);
@@ -83,6 +84,7 @@ class RaportController extends Hamster_Controller_Action
     			$ansInfoA=$rap->InfoAboutAnswersId($queId);
     			
     			$gTypes[$queId]=$post->getInt($queId);
+    			$this->view->wyjatki=array();
     			$dane=array();
     			
     			if ($queInfo["nazwa_typu"]=="jednokrotne") {
@@ -91,8 +93,11 @@ class RaportController extends Hamster_Controller_Action
    				} else $ilosc=$fill["fill"];
    			
     			//foreach($ansInfoA as $kolejnosc => $ansInfo) $suma+=$ansInfo["ilosc"];
-    			foreach($ansInfoA as $kolejnosc => $ansInfo)
+    			$suma=0;
+    			foreach($ansInfoA as $kolejnosc => $ansInfo) {
    					$dane[$ansInfo['opis']]=($ilosc?($ansInfo["ilosc"]*100/$ilosc):0);
+   					$suma+=$ansInfo["ilosc"];
+    			}
     			
     			
     			$p=new PlotQuestion($row->kolejnosc.". ".$row->pytanie,$dane,$queId,400,300,'barVPlot');
@@ -101,7 +106,8 @@ class RaportController extends Hamster_Controller_Action
     			$p=new PlotQuestion($row->kolejnosc.". ".$row->pytanie,$dane,$queId,400,300,'barHPlot');
     			$p->generatePlot();
     			
-    			if ($queInfo["nazwa_typu"]=="jednokrotne") {
+    			if ($suma==0) $wyjatki[$queId]=true;
+    			if ($queInfo["nazwa_typu"]=="jednokrotne" && $suma>0) {
     				$p=new PlotQuestion($row->kolejnosc.". ".$row->pytanie,$dane,$queId,400,300,'piePlot');
     				$p->generatePlot();
     			}		
@@ -111,7 +117,7 @@ class RaportController extends Hamster_Controller_Action
     			//$this->view->body.=$this->view->render('/raport/PytOtwarte.php');
     		}		
     	}
-    	
+    	$this->view->wyjatki=$wyjatki;
     	$this->view->gTypes=$gTypes;
      	$this->view->body=$this->view->render('/raport/raportGraficzny.php');
         $this->display();
