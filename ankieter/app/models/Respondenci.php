@@ -1,5 +1,6 @@
 <?php
-   /* klasa wyjatku ktora bede uzywal do 
+   /* 
+    * klasa wyjatku ktora bede uzywal do 
     * wyswietlenia odpowiedniego komunikatu
     * o bledzie
     */	
@@ -20,7 +21,8 @@ class Respondenci_Exception extends Exception {
 class Respondenci extends Zend_Db_Table{
 	protected $_primary = 'id_respondent';
 	
-
+	
+	
 /* Metoda sprawdzajac czy dany email jest 
  * wprowadzony poprwanie (jest poprawny).
  */
@@ -53,10 +55,9 @@ class Respondenci extends Zend_Db_Table{
  * gdy email jest NULL, jest juz taki email
  * w bazie, lub email jest zle wpisany
  */
-	public function insert(&$data)
+	public function insert($data)
     {
-	
-     	if (empty($data['e_mail'])) {
+	    if (empty($data['e_mail'])) {
        		throw new Respondenci_Exception('Podaj adres e-mail.');
        			}
 		else if (!$this->testMail($data['e_mail'])){
@@ -73,18 +74,37 @@ class Respondenci extends Zend_Db_Table{
  * gdy nie ma danego emaila w bazie lub
  * gdy wpisany email jest NULL
  */
-    public function delete($what)
+        public function delete($where)
     {
-		$db = $this->getAdapter();
-
-		$where = $db->quoteInto('e_mail = ?', $what);	
-     	if ($this->emailExist($what)){
-			throw new Respondenci_Exception('Podany adres e-mail nie istnieje  w bazie danych.');
-     	}
-									
-		return parent::delete($where);
+		$rows_affected = parent::delete($where);
+     		if($rows_affected == 0) {
+			throw new Respondenci_Exception('Podany adres e-mail nie istnieje 						 w bazie danych.');
+							}		
     } 
 
-}
 
+/* Metoda readFiles() importuje plik
+ * i wprowadza z niego email-e, oczywiscie
+ * tylko te prawidlowo wporwadzone.
+ */
+    	public function readFiles($path)
+    {	
+	$emails = file($path);
+	$count_rows = count($emails);
+	if ($count_rows == 0) {
+       		throw new Respondenci_Exception('Plik jest pusty!');
+        			}
+	for($i=0; $i<$count_rows; $i++){
+		$row = explode( ";", $emails[$i]);
+		
+		foreach ($row as $this_row)
+			if($this->testMail(trim($this_row)) && $this->emailExist(trim($this_row))) {
+				$data = array('e_mail' => trim($this_row));
+				$id = $this->insert($data); 
+						}
+				}    
+		
+    }
+
+}
 ?>
