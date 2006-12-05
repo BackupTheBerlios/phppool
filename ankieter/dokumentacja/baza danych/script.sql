@@ -30,7 +30,7 @@ drop table IF EXISTS uzytkownicy;
 
 Create table uzytkownicy (
 	id_uzytkownik Smallint UNSIGNED NOT NULL AUTO_INCREMENT,
-	login Varchar(10) NOT NULL,
+	login Varchar(30) NOT NULL,
 	haslo Varchar(15) NOT NULL,
 	grupa Tinyint NOT NULL,
 	UNIQUE (login),
