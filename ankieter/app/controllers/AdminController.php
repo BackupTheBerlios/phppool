@@ -14,6 +14,7 @@ class AdminController extends Hamster_Controller_Action
         
         $users = new Uzytkownicy;
        	$this->view->validationError = $this->_getParam('validationError');
+       	$this->view->deleteError = $this->_getParam('deleteError');
 		$this->view->poll = $users->fetchAll();
         $this->view->body = $this->view->render('/admin/adminIndex.php');
 		$this->display();
@@ -55,15 +56,18 @@ class AdminController extends Hamster_Controller_Action
 		$user = new Uzytkownicy;
 		$db = $user->getAdapter();
 		
-		$where = $db->quoteInto('id_uzytkownik = ?', $post->getRaw('ankieter_id'));
-		$rows_affected = $user->delete($where);
 		
-		$this->_forward('admin','index');
+		try{
+				$where = $db->quoteInto('id_uzytkownik = ?', $post->getRaw('ankieter_id'));
+				$rows_affected = $user->delete($where);
 		
-
-
+				$this->_forward('admin','index');
+				
+			} catch(User_Validation_Exception $e){
+	
+	$this->_forward('admin','index',array('deleteError'=>$e->getMessage()));
     }
-      
+    }    
     
 }
 ?>

@@ -58,10 +58,10 @@ Dzięki partnerstwu z firmą MaDoNET jesteśmy w stanie utrzymywać nasz serwis 
 	</form>
 	
 <?php
-if(	$this->insertionError){
+if(	$this->deleteError){
 ?>
 <div class="warning">
-<?php echo $this->insertionError;
+<?php echo $this->deleteError;
 ?>
 </div>
 <?php
