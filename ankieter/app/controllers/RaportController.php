@@ -2,6 +2,7 @@
 
 include 'raportLib/PlotQuestion.php';
 include 'raportLib/konwersja.php';
+include 'raportLib/tools.php';
 
 
 class RaportController extends Hamster_Controller_Action 
@@ -49,9 +50,6 @@ class RaportController extends Hamster_Controller_Action
      */
     public function graficznyAction()
     {   
-    	/*define("BASE", "../lib/jpgraph/src/");
-		include_once (BASE . "jpgraph.php");
-		include_once (BASE . "jpgraph_bar.php");*/
 		
 		$post = new Zend_Filter_Input($_POST);
 
@@ -180,7 +178,11 @@ class RaportController extends Hamster_Controller_Action
     			$this->view->body.=$this->view->render('/raport/PytZamkniete.php');
     		} else {
     			$this->view->ansInfo=$rap->AnswersOpened($queId);
+    			$this->view->queId=$queId;
+    			$this->view->excel=$excel;
+    			$this->view->limit=2; //tu decydujemy ile ma sie wyswietalc odpowiedzi otwartych
     			$this->view->body.=$this->view->render('/raport/PytOtwarte.php');
+    			SaveToFile("/documents/raporty/OA_$queId.txt", $this->view->ansInfo);
     		}		
     	}
     	if (!$excel)

@@ -192,7 +192,7 @@
 			$graph->SetShadow();
 			
 			// Set A title for the plot
-			$tFontSize=14;
+			$tFontSize=11;
 			$graph->title->Set($question);
 			$graph->title->SetFont(FF_VERDANA,FS_BOLD,$tFontSize); 
 			$graph->title->SetColor("darkblue");

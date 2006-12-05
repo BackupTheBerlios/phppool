@@ -1,5 +1,5 @@
 <div id="editPoolHead2"> 
-<?php echo $this->queInfo["kolejnosc"].". ".$this->queInfo["pytanie"] ?>
+<?php echo $this->queInfo["kolejnosc"].". ".stripslashes($this->queInfo["pytanie"]) ?>
 </div>
 <div id="editPoolBox">
 

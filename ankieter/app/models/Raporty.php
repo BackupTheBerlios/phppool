@@ -58,7 +58,7 @@ class Raporty {
 	}
 	public function AnswersOpened($id) {
 		$sql="select odpowiedz from odpowiedzi ".
-			"where id_pytanie=:id_pytanie";
+			"where id_pytanie=:id_pytanie ";
 		return $this->db->fetchCol($sql,array('id_pytanie'=>$id));
 	}
 	
