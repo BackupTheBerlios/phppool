@@ -1,6 +1,6 @@
 <?php
 
-require_once '/WebServ/app/models/Respondenci.php';
+require_once '../app/models/Respondenci.php';
 Zend::loadClass('Zend_Filter_Input');
 
 class RespondenciController extends Hamster_Controller_Action 
