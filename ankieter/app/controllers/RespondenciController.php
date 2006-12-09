@@ -69,9 +69,11 @@ class RespondenciController extends Hamster_Controller_Action
 		$params = $this->_action->getParams();
 			if(isset($params['id'])) {
 				$id = (int)$params['id'];
+				$num = (int)$params['page'];
 					$where = $db->quoteInto('id_respondent = ?', $id);
 					$respondent->delete($where);
-					$this->_redirect('/respondenci/edytuj/page/1');
+			
+		$this->_forward('respondenci','edytuj',array('page'=>$num));
 						}
 			else {
 		$what = trim($post->noTags('Umail'));
@@ -110,8 +112,7 @@ class RespondenciController extends Hamster_Controller_Action
 
 		$rowset = $respondent->fetchAll($where, $order, $limit, $offset);
 		
-		$respondent->currentPage += 1;
-		$this->view->page = (int)$params['page'];
+		$this->view->page = (int)$params['page']; 
 		$this->view->offset = $offset;
 		$this->view->subpage = $subpage;
 		$this->view->respondent = $rowset;

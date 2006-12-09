@@ -1,8 +1,8 @@
 ﻿<style type="text/css">
   .tabelka {position: relative; left: 140px; top: 0px; border-collapse: collapse; }
-  td {  border-bottom: 1px solid #ebebe4;  font-size: 15; padding: 1px 38px;}
+  td {  border-bottom: 1px solid #ebebe4;  font-size: 14; padding: 1px 38px;}
   thead td, tfoot td { background-color: #ebebe4;}
-  thead td { border-bottom: 1px solid #c0c0c0; border-top: 2px solid #c0c0c0; padding: 10px 45px;  font-size: 20;}
+  thead td { border-bottom: 1px solid #c0c0c0; border-top: 2px solid #c0c0c0; padding: 10px 45px;  font-size: 17;}
   tfoot td { border-top: 2px solid #c0c0c0; border-bottom: 1px solid #c0c0c0 }
   tfoot td a { display: block; padding: 2px 2px; border: 1px outset; float: left; border: 1px solid #c0c0c0; 	background-color: #ffffff; color: #000000; text-decoration: none; margin-right: 2px }
 </style>
@@ -21,8 +21,8 @@
 		<tr>
 			<td><?php echo ++$num; ?></td>
 			<td><?php echo $this->escape($rows->eMail);?></td>
-			<td> 
-			<a href="/respondenci/usun/id/<?php echo $this->escape($rows->idRespondent);?>"
+			<td> <a href="/respondenci/usun/id/<?php echo $this->escape($rows->idRespondent); ?> 
+			& /page/<?php echo $this->escape($this->page); ?>"
 				>  <img src=/images/delete.png border=0 title="usuń"> </a></td>	
 		</tr>
     <?php endforeach; ?>
