@@ -120,5 +120,21 @@ class RespondenciController extends Hamster_Controller_Action
 		$this->display();
 	}
 
+	function usunhashAction()
+	{
+		$respondent = new Respondenci();		
+		$db = $respondent->getAdapter();
+		
+		$params = $this->_action->getParams();
+		$hashEmail = $params['hash']; 
+		
+		$query = $db->quoteInto('md5(e_mail) = ?', $hashEmail);
+		try{
+		$respondent->delete($query);
+		}catch(Respondenci_Exception $e){;}
+
+		$this->_redirect('/');
+	}
+
 }
 ?>
