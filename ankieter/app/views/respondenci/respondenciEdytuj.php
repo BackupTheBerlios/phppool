@@ -21,9 +21,8 @@
 		<tr>
 			<td><?php echo ++$num; ?></td>
 			<td><?php echo $this->escape($rows->eMail);?></td>
-			<td> <a href="/respondenci/usun/id/<?php echo $this->escape($rows->idRespondent); ?> 
-			& /page/<?php echo $this->escape($this->page); ?>"
-				>  <img src=/images/delete.png border=0 title="usuń"> </a></td>	
+			<td> 
+   <a href="/respondenci/usun/id/<?php echo $this->escape($rows->idRespondent);?>/page/<?php echo $this->escape($this->page);?>">  					<img src=/images/delete.png border=0 title="usuń"> </a></td>	
 		</tr>
     <?php endforeach; ?>
       <tfoot>
