@@ -163,7 +163,12 @@
 
      
 </form>
- 
+<br>
+ 	<?php
+ 	if ($this->message) {
+ 		echo $this->message;
+ 	}
+ 	?>
        
 	</div>
     </body>

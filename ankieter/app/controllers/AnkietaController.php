@@ -1,9 +1,5 @@
 <?php
-include '../app/models/Ankiety.php';
-include '../app/models/Pytania.php';
-include '../app/models/Odpowiedzi.php';
-include '../app/models/WypelnioneAnkiety.php';
-include '../app/models/WariantyOdpowiedzi.php';
+
 class AnkietaController extends Hamster_Controller_Action 
 {
     /**
@@ -78,7 +74,7 @@ class AnkietaController extends Hamster_Controller_Action
   		
   		$this->view->questions = $temp;
   		$this->view->variants = $var;
-  		
+  		$this->view->message = 'Dziękujemy za wypełnienie ankiety';
   		$this->display();
   	}
   	

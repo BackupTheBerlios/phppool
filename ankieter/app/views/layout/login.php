@@ -19,15 +19,12 @@
 	<?php
 	} else {
 		echo 'Zalogowany jako <b>'.$user->getLogin().'</b> ';
-		echo '<a href="/index/logout">wygoluj się</a><br><br>';
+		echo '<a href="/index/logout">wygoluj się</a>';
 	}
 	?>
 	
 	
-	<a href="/ankieter">ankieter</a><br>
-	<a href="/raport">raport</a><br>
-	<a href="/admin">admin</a><br>
-	<a href="/respondenci">respondenci</a><br>
+	
 	</div>
 	<div id="bluebox_bottom"></div>
 </div>

@@ -1,3 +1,8 @@
+
+<p>
+
+
+
 ﻿<p>
 
 <?php
@@ -10,6 +15,7 @@ if(	$this->insertionError){
 <?php
 }
 ?>
+
 
 <h1> Dodaj pojędynczego respondenta</h1> 
 Dzięki współpracy z naszymi partnerami strategicznymi nieustannie doskonalimy nasz serwis CBI po to aby oferować naszym klientom najwyższej jakości produkt skierowany do badań ankietowych w internecie. Wszystko dla wielowymiarowych korzyści i satysfakcji naszych klientów</p>
@@ -56,7 +62,9 @@ Dzięki partnerstwu z firmą MaDoNET jesteśmy w stanie utrzymywać nasz serwis 
 	</select>
 	<?php echo $this->formSubmit('send','Usun respondenta'); ?> 
 	</form>
+
 </p>
+
 
 <h1>Edytuj listę respondentów</h1> 
 Każdy wprowadzony e-mail można bardzo łatwo wyedytować lub skasować. Została do tego celu przygotowana specjalna funkcja. Wysterczy  że naciśniesz na ponieżyszy przycisk i od razu możesz zabrać się do pracy. Powodzenia...

@@ -4,7 +4,7 @@
  */
 
 
-error_reporting(E_ALL|E_STRICT);
+//error_reporting(E_ALL|E_STRICT);
 function __autoload($class)
 {
     Zend::loadClass($class);
@@ -38,7 +38,7 @@ $controller->dispatch();
 
 
 
-
+ 
 
 
 

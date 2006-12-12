@@ -19,3 +19,16 @@ Przypominamy, iż ankiety demonstracyjne służą jedynie jako przykład możliw
  Nie są to kompletne badania ankietowe a jedynie skromny wycinek kilku pytań dla zobrazowania mechanizmu i
   jego możliwości.
 </p>
+<p>
+<div id="editPoolBox2" style="width:300px;margin:auto">
+<form action="/index/mail" method="post">
+Podaj swój adres email:<br>
+<input type="text" name="email" class="d" style="width:200px"><br>
+<label><input type="radio" name="akcja" value="dodaj">dodaj</label>
+<label><input type="radio" name="akcja" value="usun">usuń</label>
+<br>
+<?php echo $this->formSubmit('send','Potwierdz'); ?> 
+</form>
+</div>
+
+</p>

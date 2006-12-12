@@ -1,9 +1,7 @@
 <?php
 /**
- * Autoryzacja u�ytkownika
+ * Autoryzacja użytkownika
  * 
- * W zele�no�ci od grupy do jakiej nale�y u�ytkowik, nadawane s� mu prawa dost�pu
- * do kontroler�w i akcji
  *
  * @category	Hamster
  * @package		Hamster_Auth
@@ -12,27 +10,14 @@
  */
 class Hamster_Auth{
 	/**
-	 * Przechowuje obiekt reprezentujacy u�ytkownika
+	 * Przechowuje obiekt reprezentujacy uzytkownika
 	 * 
-	 * @var obj obietk kalsy Hamser_Auth_User
+	 * @var obj obietk klasy Hamser_Auth_User
 	 */
 	private $user;
-	/**
-	 * Z�o�ona tablica przechowuj�ca informacje o prawach dost�pu
-	 * danych grup do kontroler�w i akcji
-	 * 
-	 * Postaci:
-	 * [id grupy][nazwa kontrolera][nazwa akcji lub *], gdzie * oznacza wszyskie akcje kontrolera
-	 * np.
-	 * [2]['raport']['*'] - u�ytkownicy z grupy 2 maj� dost�p do wszystkich akcji kontorolera raport
-	 * [1]['admin']['usunrespondenta']
-	 * [1]['admin']['dodajrespondenta'] - u�ytkownicy z grupy 1 maj� dost�p do akcji 
-	 * dodajrespondenta, usun respondenta
-	 * 
-	 * @var	array
-	 */
-	private $permission = array();
-	private static $instance=null;
+	private static $instance = null;
+	private $acl = null;
+	private $groups = array(0 => 'guest', 1 => 'administrator', 2=> 'ankieter');
 	/**
 	 * Jeśli trzeba tworzy nowy obiekt klasy Hamster_Auth_User, uruchamia metode init()
 	 */
@@ -55,33 +40,33 @@ class Hamster_Auth{
 		
 	}
 	/**
-	 * Tworzy zasady praw dostępu
-	 * 
-	 * @todo dodać możliwość dynamicznego pobierania konfiguracji z pliku xml lub z Zend_Config
-	 * @todo zmienić forme zapisu przydziału praw, coś ala Zend_Acl
+	 * Tworzy ARO i ACO
 	 */
-	public function init(array $config=NULL)
+	public function init()
 	{
-		if ($config == NULL) {
-			//przypisywanie uprawie� na sztywno do z�o ;)
-			$permission =  array();
-			$permission[2]['ankieter']['*'] = 1;
-			$permission[2]['index']['*'] = 1;
-			$permission[2]['raport']['*'] = 1;
-			$permission[2]['ankieta']['*'] = 1;
-			
-			$permission[1]['index']['*'] = 1;
-			$permission[1]['admin']['*'] = 1;
-			$permission[1]['respondenci']['*'] = 1;
-			$permission[2]['ankieta']['*'] = 1;
-			
-			$permission[0]['ankieta']['*'] = 1;
-			$permission[0]['admin']['dodajrespondent'] = 1;
-			$permission[0]['admin']['usunrespondent'] = 1;
-			$permission[0]['index']['*'] = 1;
-			
-			$this->permission = $permission;
-		}
+		$acl = new Zend_Acl();  
+ 
+		$aro = $acl->aroRegistry();  
+ 
+		$aro->add('guest');  
+		$aro->add('ankieter', $aro->guest);  
+		$aro->add('administrator');  
+
+		// Zabieramy prawa, a potem jak trzeba, przyznajemy je.
+		$acl->deny();  
+ 
+		// gość
+		$acl->index->allow($aro->guest);  
+		$acl->ankieta->allow($aro->guest);   
+ 
+		// ankieter  
+		$acl->ankieter->allow($aro->ankieter);
+		$acl->raport->allow($aro->ankieter);
+		$acl->ankieta->allow($aro->ankieter);      
+ 
+		// admin
+		$acl->allow($aro->administrator); 
+		$this->acl = $acl;
 	}
 	public function login($login, $pass)
 	{
@@ -93,21 +78,16 @@ class Hamster_Auth{
 	 * 
 	 * @param string $controller nazwa kontrolera
 	 * @param string $action nazwa akcji
-	 * @return boolean przyznaje dost�p lub nie
+	 * @return boolean 
 	 */
 	public function getPermission($controller, $action)
 	{
-		if (array_key_exists($controller, $this->permission[$this->user->getGroup()])) {
-			if (array_key_exists('*', $this->permission[$this->user->getGroup()][$controller])) {
-				return true;
-			} else if (array_key_exists($action, $this->permission[$this->user->getGroup()][$controller])) {
-				return true;
-			} else {
-				return false;
-			}
+		
+		if ($this->acl->valid($this->groups[$this->user->getGroup()], $action, $controller)) {
+			return true;	
 		} else {
 			return false;
-		}
+		}	
 	}
 	public function logout()
 	{

@@ -17,12 +17,30 @@ function serialize(s)
 <div id="editPoolBox">
 
 <?php echo $this->pool->opis ?>
-<br>
+<form action="/ankieter/stan/ankieta/<?php echo $this->poolId; ?>" method="post">
+<p>
+<b>Status:</b> <?php echo $this->pool->status; ?> 
 
 
 
+<?php
+if ($this->nextStatus) {
+	echo $this->formHidden('nextStatus', $this->nextStatus);
+	echo $this->formSubmit('send',$this->send, array('id'=>'input_submit'));
+}
+?>
+</p>
+</form>
 </div>
-
+<?php
+if ($this->pool->status == 'zakonczona') {
+?>
+<div id="editPoolBox2">
+	Ankieta jest już zakończona, nie można już edytować jej pytań.
+</div>
+<?php	
+} else {
+?>
 
 <div id="editPoolBox2">
 
@@ -72,7 +90,9 @@ foreach ($this->questions as $row) {
 </ul>
 </div>
 
-
+<?php
+}
+?>
   
   
 

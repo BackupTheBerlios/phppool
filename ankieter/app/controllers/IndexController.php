@@ -26,9 +26,12 @@ class IndexController extends Hamster_Controller_Action
   		$user->login($_POST['input_login'], $_POST['input_haslo']);
   		
   		if($user->getGroup()==2){
-  			$this->_forward('ankieter','/index');
-  		}else{
-  			$this->display();
+  			$this->_redirect('/ankieter/index');
+  		} else if($user->getGroup()==1){
+  			$this->_redirect('/admin/index');
+  			
+  		}else {
+  			$this->_redirect('/index/index');
   		}
   		
   	}
@@ -36,11 +39,12 @@ class IndexController extends Hamster_Controller_Action
   	{
   		$user = Zend::registry('user');
   		$user->logout();
-  		$this->display();
+  		$this->_redirect('/index/index');
   	}
   	public function unauthorizedAction()
   	{
-  		echo 'nie masz dostępu do tej akcji';
+  		$this->view->body = 'nie masz dostępu do tej akcji';
+  		$this->display();
   	}
   	public function pokazAction()
   	{
@@ -54,6 +58,37 @@ class IndexController extends Hamster_Controller_Action
   		
   		$this->view->body = $this->view->render('/ankieta/ankietaPokaz.php');
   		$this->display();
+  	}
+  	public function usunietymailAction()
+  	{
+  		$this->view->body = "Podany email został usuniety z bazy danych";
+		$this->display();
+  	}
+  	public function mailAction()
+  	{
+  		$respondent = new Respondenci;
+  		$post = new Zend_Filter_Input($_POST);
+  		
+  		if (strtolower($_SERVER['REQUEST_METHOD']) == 'post') {
+  			if ($post->getRaw('akcja')=='dodaj') {
+				$data = array('e_mail' => $post->getRaw('email'));
+  		   		try{
+					$id = $respondent->insert($data);
+				} catch (Respondenci_Exception $e){
+					//dodaj obslugę błędów
+				}
+  			} else {
+  				$db = $respondent->getAdapter();
+  				$where = $db->quoteInto('e_mail = ?', $post->getRaw('email'));
+  				try {
+  					$respondent->delete($where);	
+  				} catch (Respondenci_Exception $e){
+					//dodaj obslugę błędów
+				}
+  				
+  			}
+  		}
+  		$this->_redirect('/');
   	}
 }
 ?>

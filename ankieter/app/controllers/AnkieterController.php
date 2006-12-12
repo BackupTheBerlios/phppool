@@ -29,7 +29,15 @@ class AnkieterController extends Hamster_Controller_Action
 			$poolId = $post->getInt('ankieta_id');
 		}
 		$this->view->poolId = $poolId;
-		$this->view->pool = $poll->find($poolId);	
+		$this->view->pool = $poll->find($poolId);
+		if ($this->view->pool->status == 'nieaktywna') {
+			$this->view->nextStatus = 'aktywna';
+			$this->view->send = 'Aktywuj ankiete';
+		} elseif ($this->view->pool->status == 'aktywna') {
+			$this->view->nextStatus = 'zakonczona';
+			$this->view->send = 'Zakoncz ankiete';
+		}
+		
 		$question = new Pytania();
 		$this->view->questions = $question->findAllWithAnkietaId($poolId);
 		$this->view->questionsVariants = array('jednokrotne', 'wielokrotne','otwarte');
@@ -72,6 +80,53 @@ class AnkieterController extends Hamster_Controller_Action
     /**
      * Dodaje pytanie do danej ankiety
      */
+    public function stanAction()
+    {
+    	if (strtolower($_SERVER['REQUEST_METHOD']) == 'post') {
+    		$poll = new Ankiety;
+    		$post = new Zend_Filter_Input($_POST);
+    		$row =  $poll->find($this->_getParam('ankieta'));
+    		$row->status = $post->getRaw('nextStatus');
+    		if ($row->status == 'aktywna') {
+    			$row->dataRozpoczecia = date("Y-m-d H:i:s");
+    			
+    			$this->_forward('ankieter','mailsend', array('ankieta'=>$this->_getParam('ankieta')));
+    		} else if ($row->status == 'zakonczona') {
+    			$row->dataZakonczenia = date("Y-m-d H:i:s");
+    			$this->_forward('ankieter','edytuj', array('ankieta'=>$this->_getParam('ankieta')));
+    		}
+    		$row->save();
+    		
+    	}
+    	
+    	
+    	
+    } 
+    public function mailsendAction()
+    {
+    	//treśc wysłanych maili wyświetlamy w pliku txt
+    	$file = new Hamster_File();
+    	$file->setDir('../logs');
+    	$file->setFileName('mail.txt');
+    	$respondent = new Respondenci;
+    	$users = $respondent->fetchAll();
+    	$data = '';
+    	foreach ($users as $user) {
+    		$data.= "Mailto:".$user->eMail."\n".
+    				"Prosimy o wypełnienie tej ankiety:\n".
+    				"http://127.0.0.1/ankieta/pokaz/ankieta/".$this->_getParam('ankieta')."\n".
+    				"\n \n".
+    				"Jeżeli nie chcesz otrzymywać już więcej takich maili, kliknij na link poniżej\n".
+    				"http://127.0.0.1/respondenci/usunhash/hash/".md5($user->eMail).
+    				"\n=======================================================".
+    				"\n \n";
+    	}
+    	
+    	
+    	$file->putFileContent($data);
+    	
+    	$this->_forward('ankieter','edytuj', array('ankieta'=>$this->_getParam('ankieta')));
+    }
     public function dodajpytanieAction()
     {
     	$post = new Zend_Filter_Input($_POST);
