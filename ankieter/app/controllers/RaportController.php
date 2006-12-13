@@ -66,6 +66,8 @@ class RaportController extends Hamster_Controller_Action
 		$this->view->questions = $question->findAllWithAnkietaId($pollId);
 	
 		$qV = array('jednokrotne'=>0, 'wielokrotne'=>1,'otwarte'=>2);
+		$roz= array(array(x=>400,y=>300), array(x=>640,y=>480), array(x=>800, y=>600), array(x=>1024, y=>768));
+		$rozId=$post->getInt('roz_id');
 		
     	
     	$rap=new Raporty; 
@@ -74,8 +76,10 @@ class RaportController extends Hamster_Controller_Action
     	$ques=$rap->AmountOfQuestionsId($pollId);
 
     	
-    	$gTypes=array();
+    	$licznik=0;
+    	$gTypes=array(array());
     	$wyjatki=array();
+    	$selected=array();
     	foreach ($this->view->questions as $row) {
     		$queId=$row->idPytanie;	
     		$queInfo=$rap->InfoAboutQuestionId($queId);
@@ -83,7 +87,9 @@ class RaportController extends Hamster_Controller_Action
     		if ($queInfo["nazwa_typu"]!='otwarte') {
     			$ansInfoA=$rap->InfoAboutAnswersId($queId);
     			
-    			$gTypes[$queId]=$post->getInt($queId);
+    			$gTypes[$queId]=$post->getRaw("ID".$queId);
+    			if (!empty($gTypes[$queId])) $selected[$licznik++]=$queInfo["kolejnosc"]; 
+
     			$this->view->wyjatki=array();
     			$dane=array();
     			
@@ -99,17 +105,22 @@ class RaportController extends Hamster_Controller_Action
    					$suma+=$ansInfo["ilosc"];
     			}
     			
-    			
-    			$p=new PlotQuestion($row->kolejnosc.". ".$row->pytanie,$dane,$queId,400,300,'barVPlot');
-    			$p->generatePlot();
-    			
-    			$p=new PlotQuestion($row->kolejnosc.". ".$row->pytanie,$dane,$queId,400,300,'barHPlot');
-    			$p->generatePlot();
-    			
-    			if ($suma==0) $wyjatki[$queId]=true;
-    			if ($queInfo["nazwa_typu"]=="jednokrotne" && $suma>0) {
-    				$p=new PlotQuestion($row->kolejnosc.". ".$row->pytanie,$dane,$queId,400,300,'piePlot');
+    			if (!empty($gTypes[$queId]) && in_array(0,$gTypes[$queId])) {
+    				$p=new PlotQuestion($row->kolejnosc.". ".$row->pytanie,$dane,$queId,$roz[$rozId]["x"],$roz[$rozId]["y"],'barVPlot');
     				$p->generatePlot();
+    			}
+    			
+    			if (!empty($gTypes[$queId]) && in_array(1,$gTypes[$queId])) {
+    				$p=new PlotQuestion($row->kolejnosc.". ".$row->pytanie,$dane,$queId,$roz[$rozId]["x"],$roz[$rozId]["y"],'barHPlot');
+    				$p->generatePlot();
+    			}
+    			
+    			if (!empty($gTypes[$queId]) && in_array(2,$gTypes[$queId])) {
+    				if ($suma==0) $wyjatki[$queId]=true;
+    				if ($queInfo["nazwa_typu"]=="jednokrotne" && $suma>0) {
+    					$p=new PlotQuestion($row->kolejnosc.". ".$row->pytanie,$dane,$queId,$roz[$rozId]["x"],$roz[$rozId]["y"],'piePlot');
+    					$p->generatePlot();
+    				}
     			}		
     		} else {
     			//Pytania otwarte
@@ -117,8 +128,12 @@ class RaportController extends Hamster_Controller_Action
     			//$this->view->body.=$this->view->render('/raport/PytOtwarte.php');
     		}		
     	}
+
+    	
     	$this->view->wyjatki=$wyjatki;
     	$this->view->gTypes=$gTypes;
+    	$this->view->selected=$selected;
+    	$this->view->pollId=$pollId;
      	$this->view->body=$this->view->render('/raport/raportGraficzny.php');
         $this->display();
     }

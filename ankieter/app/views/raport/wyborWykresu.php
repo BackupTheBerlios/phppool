@@ -21,53 +21,42 @@
 	<?php
 	foreach ($this->questions as $row) {
 		switch ($row->idTypOdpowiedzi) {
-			case 0: $addBarV=' checked="checked" '; $addBarH=' '; $addPie=' ';  
+			case 0: $addBarV=' checked="checked" '; $addBarH=' '; $addPie=' '; 
+					$addRadio1=' checked="checked" '; $addRadio2=' '; $addRadio3=' ';
 			break;
 			case 1: $addBarV=' checked="checked" '; $addBarH=' '; $addPie=' disabled="disabled" ';
+					$addRadio1=' checked="checked" '; $addRadio2=' '; $addRadio3=' ';
 			break;
 			case 2: $addBarV=' disabled="disabled" '; $addBarH='  disabled="disabled"  '; $addPie=' disabled="disabled" ';
+					$addRadio1=' disabled="disabled" '; $addRadio2='  disabled="disabled" '; $addRadio3=' disabled="disabled" ';
 			break;
 		}
 		echo "<tr><td>".$row->kolejnosc.". </td><td style='text-align:left;'>".$row->pytanie."</td><td><img src='/images/imans".$row->idTypOdpowiedzi.".gif' align='center' valign='center'></td>";
-		echo 	'<td><input type="radio" name="'.$row->idPytanie.'" value="0" '.$addBarV.'></td>';
-		echo 	'<td><input type="radio" name="'.$row->idPytanie.'" value="1" '.$addBarH.'></td>';
-		echo 	'<td><input type="radio" name="'.$row->idPytanie.'" value="2" '.$addPie.'></td>';
+		echo 	'<td><input type="checkbox" name="ID'.$row->idPytanie.'[]" value="0" '.$addBarV.'></td>';
+		echo 	'<td><input type="checkbox" name="ID'.$row->idPytanie.'[]" value="1" '.$addBarH.'></td>';
+		echo 	'<td><input type="checkbox" name="ID'.$row->idPytanie.'[]" value="2" '.$addPie.'></td>';
+		
+	/*	echo 	'<td><input type="radio" name="'.$row->idPytanie.'" value="0" '.$addRadio1.' ></td>';
+		echo 	'<td><input type="radio" name="'.$row->idPytanie.'" value="1" '.$addRadio2.' ></td>';
+		echo 	'<td><input type="radio" name="'.$row->idPytanie.'" value="2" '.$addRadio3.' ></td>';
+	*/
 		echo "</tr>\n";
 	}
 
 	?>
 	</table>
+	<div align="right">
+	Wybierz rozdzielczość: 
+	<select name="roz_id">
+		<option value="0">400x300 px</option>
+		<option value="1">640x480 px</option>
+		<option value="2">800x600 px</option>
+		<option value="3">1024x768 px</option>
+	</select>
+	</div>
+	<br>
+	<br>
 <?php echo $this->formSubmit('send','Generuj raport'); ?> 
 </form>
 
 </div>
-
-
- 
-<!-- 
-<div>
-<ul class="sortable" id="sort1">
-<?php
-$position = 1;
-foreach ($this->questions as $row) {
-?>
-	<li class="sortableitem" id="<?php echo $row->idPytanie; ?>">
-	
-	<div class="dupa">
-	<a href=/ankieter/odpowiedzi/ankieta/<?php echo $this->poolId; ?>/pytanie/<?php echo $row->idPytanie; ?>>
-	<img src=/images/edit.png border=0 title="dodaj odpowiedzi" style="margin-right:5px;">
-	</a>
-	<a href=/ankieter/usunpytanie/ankieta/<?php echo $this->poolId; ?>/pytanie/<?php echo $row->idPytanie; ?>>
-	<img src=/images/delete_new.png border=0 title="usun pytanie"></a>
-	</div>
-	<?php echo $row->pytanie; ?>
-	
-	</li>
-<?php	
-	$position++;
-}
-?>	
-</ul>
-</div>
-
--->
