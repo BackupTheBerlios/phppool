@@ -67,10 +67,7 @@ class Uzytkownicy extends Zend_Db_Table
     
    public function delete($where)
     {
-		if (empty($where['login'])) {
-        	throw new User_Validation_Exception('Nie ma konta u�ytkownika! Nie mo�esz nic usun��!');
-        }
-     
+		
 		return parent::delete($where);
 		
     }

@@ -17,7 +17,7 @@ Dzięki współpracy z naszymi partnerami strategicznymi nieustannie doskonalimy
 	</div>
 	<label for="ankiter_haslo">Hasło</label>
 	<div>
-	<?php echo $this->formText('ankieter_haslo', null, array('id'=>'ankieter_haslo', 'class'=>'input_classic')); ?>
+	<?php echo $this->formPassword('ankieter_haslo', null, array('id'=>'ankieter_haslo', 'class'=>'input_classic')); ?>
 	</div>
 	
 	<?php echo $this->formSubmit('send','Dodaj ankietera',array('id'=>'input_submit')); ?>
@@ -57,14 +57,5 @@ Dzięki partnerstwu z firmą MaDoNET jesteśmy w stanie utrzymywać nasz serwis 
 	<?php echo $this->formSubmit('send','Usun ankietera'); ?> 
 	</form>
 	
-<?php
-if(	$this->deleteError){
-?>
-<div class="warning">
-<?php echo $this->deleteError;
-?>
-</div>
-<?php
-}
-?>
+
 </p>
