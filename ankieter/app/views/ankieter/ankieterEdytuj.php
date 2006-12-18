@@ -33,7 +33,7 @@ if ($this->nextStatus) {
 </form>
 </div>
 <?php
-if ($this->pool->status == 'zakonczona') {
+if ($this->pool->status != 'nieaktywna') {
 ?>
 <div id="editPoolBox2">
 	Ankieta jest już zakończona, nie można już edytować jej pytań.
