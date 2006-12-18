@@ -21,6 +21,8 @@ class AnkieterController extends Hamster_Controller_Action
      */
     public function edytujAction()
     {   
+
+		
 		$post = new Zend_Filter_Input($_POST);
 		$poll = new Ankiety;
 		$db = $poll->getAdapter();
@@ -113,18 +115,19 @@ class AnkieterController extends Hamster_Controller_Action
     	$users = $respondent->fetchAll();
     	$data = '';
     	foreach ($users as $user) {
-    		$data.= "Mailto:".$user->eMail."\n".
+    		$data = "Witamy,\n".
     				"Prosimy o wypełnienie tej ankiety:\n".
-    				"http://127.0.0.1/ankieta/pokaz/ankieta/".$this->_getParam('ankieta')."\n".
+    				"http://knip.pol.lublin.pl/~projekt5/ankieta/pokaz/ankieta/".$this->_getParam('ankieta')."\n".
     				"\n \n".
     				"Jeżeli nie chcesz otrzymywać już więcej takich maili, kliknij na link poniżej\n".
-    				"http://127.0.0.1/respondenci/usunhash/hash/".md5($user->eMail).
+    				"http://knip.pol.lublin.pl/~projekt5/respondenci/usunhash/hash/".md5($user->eMail).
     				"\n=======================================================".
     				"\n \n";
+    		mail($user->eMail, "Nowa Ankieta", $data);
     	}
     	
     	
-    	$file->putFileContent($data);
+    	//$file->putFileContent($data);
     	
     	$this->_forward('ankieter','edytuj', array('ankieta'=>$this->_getParam('ankieta')));
     }
