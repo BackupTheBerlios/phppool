@@ -14,7 +14,6 @@ class AdminController extends Hamster_Controller_Action
         
         $users = new Uzytkownicy;
        	$this->view->validationError = $this->_getParam('validationError');
-      // 	$this->view->deleteError = $this->_getParam('deleteError');
 		$this->view->poll = $users->fetchAll();
         $this->view->body = $this->view->render('/admin/adminIndex.php');
 		$this->display();
